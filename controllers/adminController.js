@@ -7,7 +7,7 @@ const multer = require('multer')
 const path =require('path')
 
 let Storage = multer.diskStorage({
-  destination: "./public/uploads/",
+  destination: "./public/admin/uploads/",
   filename: (req, file, cb) => {
     cb(
       null,

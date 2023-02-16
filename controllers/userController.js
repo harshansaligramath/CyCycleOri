@@ -1,6 +1,8 @@
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt');
 
+const Product=require("../models/product")
+
 const loadRegister = async (req, res) => {
     try {
         res.render('login',{active:1})
@@ -127,14 +129,53 @@ const userLogout = async (req, res) => {
 }
 
 
+// const loadProducts = async (req, res) => {
+//     try {
+//         res.render('products',{user:null})
+//     }
+//     catch (error) {
+//         console.log(error.message)
+//     }
+// }
+
+
 const loadProducts = async (req, res) => {
     try {
-        res.render('products',{user:null})
-    }
-    catch (error) {
-        console.log(error.message)
+        productData = await Product.find()
+        console.log(productData);
+        if (req.session.user) { session = req.session.user } else session = false
+        res.render('products', { user: session, product: productData })
+    } catch (error) {
+        console.log(error.message);
     }
 }
+
+
+// const loadProducts = async (req, res) => {
+//     try {
+//         var search = "";
+//         if (req.query.search) {
+//           // console.log("re"+req.query);
+//           search = req.query.search;
+//           // console.log("search:"+search);
+//         }
+//         const userData = await Prod.find({
+//             isAvailable:1,
+//           $or: [
+//             { name: { $regex: ".*" + search + ".*" } },
+//             { description: { $regex: ".*" + search + ".*" } },
+//             { price: { $regex: ".*" + search + ".*" } },
+//             { image: { $regex: ".*" + search + ".*" } },
+
+//           ],
+//         });
+//         res.render("products", { users: userData });
+//       } catch (error) {
+//         console.log(error.message);
+//       }
+// }
+
+
 
 
 
