@@ -1,0 +1,144 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+
+  
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/products">
+        <i class="bi bi-grid"></i>
+        <span>Product Details</span>
+      </a>
+    </li><li class="nav-item">
+      <a class="nav-link " href="/admin/users">
+        <i class="bi bi-grid"></i>
+        <span>User Management</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/category">
+        <i class="bi bi-grid"></i>
+        <span>Category Management</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Order and Payment</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="index.html">
+        <i class="bi bi-grid"></i>
+        <span>Sales Report</span>
+      </a>
+    </li>
+    
+    
+  </ul>
+
+</aside>
+
+  <!-- Layout container -->
+  <div class="layout-page">
+    <!-- Navbar -->
+
+    <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+      id="layout-navbar">
+      <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+          <i class="bx bx-menu bx-sm"></i>
+        </a>
+      </div>
+
+      <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+        <!-- Search -->
+        <div class="navbar-nav align-items-center">
+          <form>
+            <div class="nav-item d-flex align-items-center">
+              <button style="border: 0; background-color: rgb(255, 255, 255);" type="submit"><i
+                  class="bx bx-search fs-4 lh-0"></i></button>
+              <input type="text" name="search" class="form-control border-0 shadow-none" placeholder="Search..."
+                aria-label="Search..." value="<%-val%>" />
+            </div>
+          </form>
+        </div>
+        <!-- /Search -->
+        </ul>
+      </div>
+    </nav>
+
+    <!-- / Navbar -->
+
+    <div class="content-wrapper" style="margin-left: 25%;">
+      <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+          <h5 class="card-header">USER DETAILS</h5>
+          <div class="table-responsive text-nowrap">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Names</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if(users.length> 0){
+
+                  for(let i=0;i<users.length;i++){ %>
+                    <tr>
+                      <td>
+                        <%= users[i].name %>
+                      </td>
+                      <td>
+                        <%= users[i].email %>
+                      </td>
+                      <td>
+                        <%= users[i].mobile %>
+                      </td>
+                      <td>
+                        <% if(users[i].is_verified){ if(users[i].status==1){ %>
+                          <span class="badge bg-label-success me-1">Online</span>
+                          <% } else{ %>
+                            <span class=" bg-label-primary me-1">last seen at <%=users[i].status %></span>
+                            <% }}else { %>
+                              <span class="badge bg-label-warning me-1">Blocked</span>
+                              <% } %>
+                      </td>
+                      <td>
+                        <% if(users[i].is_verified){ %>
+                          <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#block"
+                            onclick="del('<%- users[i]._id %>')">Block</button>
+                          <a id='<%- users[i]._id %>' href="/admin/block?id=<%= users[i]._id %>"
+                            style="display: none">Block</a>
+                          <% } else{ %>
+                            <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#unBlock"
+                              onclick="del('<%- users[i]._id %>')">UnBlock</button>
+                            <a id='<%- users[i]._id %>' href="/admin/block?id=<%= users[i]._id %>"
+                              style="display: none">UnBlock</a>
+                            <% } %>
+                      </td>
+                    </tr>
+                    <% } } else{ %>
+                      <tr>
+                        <td colspan="5">users not found </td>
+                      </tr>
+                      <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <!-- Footer -->
+        <%- include ('../layouts/adminFooter.ejs') %>
