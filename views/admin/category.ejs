@@ -28,6 +28,15 @@
         <span>Category Management</span>
       </a>
     </li>
+
+
+   
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/banners">
+        <i class="bi bi-grid"></i>
+        <span>banner Management</span>
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link " href="/admin/dashboard">
         <i class="bi bi-grid"></i>
@@ -40,7 +49,7 @@
         <span>Sales Report</span>
       </a>
     </li>
-    
+       
     
   </ul>
 
@@ -129,7 +138,7 @@
             </div>
           </div>
         </div>
-        <div  style="background-color: #ff0000;" class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        <div  style="background-color: #ded5d5;" class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
           aria-hidden="false">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div  class="modal-content">
@@ -145,7 +154,7 @@
                     Category</label>
                   <input type="text" id="form3Example3c" class="form-control" name="category" required /> <br>
                   <% if(typeof message !=='undefined' ) { %>
-                    <p style="color: rgb(255, 0, 0); font-weight: bold">
+                    <p style="color: rgb(199, 185, 185); font-weight: bold">
                       <%= message %>
                     </p>
                     <% } %>
@@ -174,7 +183,7 @@
                   Category</label>
                 <input type="text" id="form3Example3c" class="form-control" name="category" required /> <br>
                 <% if(typeof message !=='undefined' ) { %>
-                  <p style="color: rgb(255, 0, 0); font-weight: bold">
+                  <p style="color: rgb(144, 135, 135); font-weight: bold">
                     <%= message %>
                   </p>
                   <% } %>
@@ -188,6 +197,6 @@
         </div>
       </div>
         <div class="buy-now">
-          <button style="margin-left: 45%;" id="addb" class="btn btn-danger btn-buy-now"data-toggle="modal" data-target="#add">+ ADD CATEGORY</button>
+          <button style="margin-left: 45%;" id="addb" class="btn btn-danger btn-buy-now"data-toggle="modal" data-target="#add">ADD CATEGORY</button>
         </div>
         <%- include ('../layouts/adminFooter.ejs') %>

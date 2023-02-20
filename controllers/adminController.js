@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const Category = require('../models/category')
 const Product = require('../models/product')
+const Banner=require("../models/banner")
 const bcrypt = require("bcrypt");
 
 const multer = require('multer')
@@ -18,6 +19,24 @@ let Storage = multer.diskStorage({
 let upload = multer({
   storage: Storage,
 }).single("image");
+
+
+let Storage1 = multer.diskStorage({
+  destination: "./public/admin/banner/",
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+let upload1 = multer({
+  storage: Storage1,
+}).single("image");
+
+
+
+
 
 
 
@@ -205,6 +224,57 @@ const addProduct = async (req, res) => {
     console.log(error.message);
   }
 };
+
+
+
+
+const loadBanners = async (req, res) => {
+  try {
+    const productData = await Banner.find();
+    res.render("banner", { products:productData });  
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const loadAddBanners = async (req, res) => {
+  try {
+    const categoryData = await Category.find();
+    res.render("addBanner", { category: categoryData });  
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const addBanner = async (req, res) => {
+  try {
+    const categoryData = await Category.find();
+    console.log(req.file);
+    const banner = Banner({
+      name: req.body.name, 
+      price: req.body.price,
+      description: req.body.description,
+      // stock: req.body.stock,
+      category: req.body.category,
+      image:req.file.filename
+    });
+      console.log(banner);
+    const bannerData = await banner.save();
+    if (bannerData) {
+      res.render("banner", {
+        message: "registration successfull.",
+        category: categoryData,
+        banners:bannerData ,
+        products:bannerData 
+      });
+    } else {
+      res.render("banner", { message: "registration failed", products:bannerData  });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+
+
 module.exports = {
   loadLogin,
   verifyLogin,
@@ -219,7 +289,13 @@ module.exports = {
   addCategory,
   editCategory,
   deleteCategory,
-  upload
+  upload,
+  upload1,
+  loadBanners,
+  loadAddBanners,
+  addBanner,
+  loadAddBanners
+
 };
  
 

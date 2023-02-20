@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyCycle</title>
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="assets/css/login.css">
+    <style> span{color: red; height: 20px;} </style>
+</head>
+
+<body>
+    <div class="container <% if(active){ %> right-panel-active <% } %>" id="container">
+        <div class="form-container sign-up-container">
+            <form action="/register" method="post" onsubmit="return validateSignup()">
+                <h1>Create Account</h1>
+               
+                <span style="color: black;">use your email for registration</span>
+                <div class="infield">
+                    <input class="in" type="text" placeholder="Name" name="name" id="name" onkeyup="validateName()" />
+                    <span id="errName"></span>
+                </div>
+                <div class="infield">
+                    <input class="in" type="text" placeholder="Email" name="email" id="email" onkeyup="validateEmail()" />
+                    <span id="errEmail"></span>  
+                </div>
+                <div class="infield">
+                    <input class="in" type="text" placeholder="mobile no" name="mno" id="number" onkeyup="validateNumber()" />
+                    <span id="errNumber"></span>
+                </div>
+                <div class="infield">
+                    <input class="in" type="password" placeholder="Password" name="password" id="password" onkeyup="validatePassword()" />
+                    <span id="errPassword"></span>
+                </div>
+                <button type="submit" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+          
+            <form action="/login"  method="post">
+                <h1>Sign in</h1>
+                <div class="social-container">
+                    
+                </div>
+                <span style="color: black;">provide credentials to login</span>
+                <div class="infield">
+                    <input id="email" type="text" placeholder="Email" name="email" onkeyup="validateEmail()"/>
+                    <span id="errEmail"></span>  
+                </div>
+                <div class="infield">
+                    <input type="password" id="password" placeholder="Password" name="password" onkeyup="validatePassword()"/>
+                    <span id="errPassword"></span>
+                </div>
+                <a href="#" class="forgot">Forgot your password?</a>
+                <button type="submit" onclick="validateEmail(), validatePassword()">Login</button>
+                <% if(typeof message !=='undefined' ){ %>
+                  <span style="color: crimson; padding-top: 20px;"><%= message %></span>
+                  <% } %>
+            </form>
+        </div>
+        <div class="overlay-container" id="overlayCon">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button>Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button>Sign Up</button>
+                </div>
+            </div>
+            <button id="overlayBtn"></button>
+        </div>
+    </div>
+    <footer>
+    </footer>
+    
+    <!-- js code -->
+    <script>
+        const container = document.getElementById('container');
+        const overlayCon = document.getElementById('overlayCon');
+        const overlayBtn = document.getElementById('overlayBtn');
+
+        overlayBtn.addEventListener('click', () => {
+            container.classList.toggle('right-panel-active');
+
+            overlayBtn.classList.remove('btnScaled');
+            window.requestAnimationFrame(() => {
+                overlayBtn.classList.add('btnScaled');
+            })
+        });
+
+    </script>
+<script src="validation.js"></script>
+</body>
+</html>
+
+
+
+/ const loadBanner = async (req, res) => {
+    //   try {
+        
+    //     res.render("banner",);  
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+    // };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // const addBanner = async (req, res) => {
+    //   try {
+    //     // const categoryData = await Category.find();
+    //     // console.log(req.file);
+    //     const banner = Banner({
+    //       price: req.body.price,
+    //       description: req.body.description,
+    //       image:req.file.filename
+    //     });
+    //       console.log(banner);
+    //     const bannerData = await banner.save();
+    //     if (bannerData) {
+    //       res.render("banner", {
+    //         message: "registration successfull.",
+    //         banners:bannerData 
+    //       });
+    //     } else {
+    //       res.render("product", { message: "registration failed", banners:bannerData  });
+    //     }
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+      
+    // }
+    
+
+
+
+    const multer = require('multer')
+const path =require('path')
+
+const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        if (file.fieldname === 'image') {
+          cb(null, 'public/uploads')
+        } else if(file.fieldname === 'images'){
+          cb(null, 'public/products')
+        }
+        else {
+          cb(null, 'public/banners')
+        }
+      },
+      filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname))
+      }
+    
+    })
+    
+    exports.upload = multer({ storage })
+
+
+    admin_route.get('/add-banner',adminLoginAuth.isLogin,adminController.addBanner)
+admin_route.post('/loadBanners',multer.upload.array('bannerImage',3),adminController.addBannerSave)
+
+
+
+<div class="shop-p__collection">
+    <div class="row is-grid-active">
+        
+        <% if(product.length> 0){
+
+            for(let i=0;i<product.length;i++){ %>
+
+
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="product-m">
+                <div class="product-m__thumb">
+
+                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+
+                        <img class="aspect__img" src="/admin/uploads/<%=product[i].image%>" alt=""></a>
+                    <div class="product-m__quick-look">
+
+                        <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a></div>
+                    <div class="product-m__add-cart">
+
+                        <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a></div>
+                </div>
+                <div class="product-m__content">
+                    <div class="product-m__category">
+
+                        <a href="shop-side-version-2.html"> <%= product[i].name %></a></div>
+                    <div class="product-m__name">
+
+                        <a href="product-detail.html"><%= product[i].description %></a></div>
+                    <div class="product-m__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+
+                        <span class="product-m__review">(23)</span></div>
+                    <div class="product-m__price"> <%= product[i].price%></div>
+                    <div class="product-m__hover">
+                        <div class="product-m__preview-description">
+
+                            <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                        <div class="product-m__wishlist">
+
+                            <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } }
+        else{ %>
+            <tr>
+                <td colspan="5">products not found </td>
+            </tr>
+            <% }%>
+        
+       
+       
+        
+                                           
+    </div>
+</div>

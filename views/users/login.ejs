@@ -1,71 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyCycle</title>
+    <link rel="stylesheet" href="assets/css/login.css" />
+  </head>
+  <body>
+    <div class="cotn_principal <% if(active){ %> right-panel-active <% } %>">
+      <div class="cont_centrar">
+        <div class="cont_login">
+          <div class="cont_info_log_sign_up">
+            <div class="col_md_login">
+              <div class="cont_ba_opcitiy">
+                <h2>LOGIN</h2>
+                <p></p>
+                <button class="btn_login" onclick="cambiar_login()">
+                  LOGIN
+                </button>
+              </div>
+            </div>
+            <div class="col_md_sign_up">
+              <div class="cont_ba_opcitiy">
+                <h2>SIGN UP</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexgen</title>
-    <!-- font awesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- css stylesheet -->
-    <link rel="stylesheet" href="assets/css/login.css">
-    <style> span{color: red; height: 20px;} </style>
-</head>
+                <p></p>
 
-<body>
-    <div class="container <% if(active){ %> right-panel-active <% } %>" id="container">
-        <div class="form-container sign-up-container">
-            <form action="/register" method="post" onsubmit="return validateSignup()">
-                <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social">N</a>
-                    <a href="#" class="social">e</a>
-                    <a href="#" class="social">X</a>
-                    <a href="#" class="social">G</a>
-                    <a href="#" class="social">e</a>
-                    <a href="#" class="social">N</a>
-                </div>
-                <span style="color: black;">use your email for registration</span>
-                <div class="infield">
-                    <input class="in" type="text" placeholder="Name" name="name" id="name" onkeyup="validateName()" />
-                    <span id="errName"></span>
-                </div>
-                <div class="infield">
-                    <input class="in" type="text" placeholder="Email" name="email" id="email" onkeyup="validateEmail()" />
-                    <span id="errEmail"></span>  
-                </div>
-                <div class="infield">
-                    <input class="in" type="text" placeholder="mobile no" name="mno" id="number" onkeyup="validateNumber()" />
-                    <span id="errNumber"></span>
-                </div>
-                <div class="infield">
-                    <input class="in" type="password" placeholder="Password" name="password" id="password" onkeyup="validatePassword()" />
-                    <span id="errPassword"></span>
-                </div>
-                <button type="submit" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">Sign Up</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-          
-            <form action="/login"  method="post">
+                <button class="btn_sign_up" onclick="cambiar_sign_up()">
+                  SIGN UP
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="cont_back_info">
+            <div class="cont_img_back_grey">
+              <img
+                src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="cont_forms">
+            <div class="cont_img_back_">
+              <img
+                src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
+                alt=""
+              />
+            </div>
+            <div class="cont_form_login">
+              <a href="#" onclick="ocultar_login_sign_up()"
+                ></a
+              >
+              <!-- <h2>LOGIN</h2>
+              <input type="text" placeholder="Email" />
+              <input type="password" placeholder="Password" />
+              <button class="btn_login" onclick="cambiar_login()">LOGIN</button> -->
+
+              <form action="/login"  method="post">
                 <h1>Sign in</h1>
                 <div class="social-container">
-                    <a href="#" class="social">N</a>
-                    <a href="#" class="social">e</a>
-                    <a href="#" class="social">X</a>
-                    <a href="#" class="social">G</a>
-                    <a href="#" class="social">e</a>
-                    <a href="#" class="social">N</a>
+                    
                 </div>
                 <span style="color: black;">provide credentials to login</span>
-                <div class="infield">
+                <div class="infield" style="margin-top: 30px;">
                     <input id="email" type="text" placeholder="Email" name="email" onkeyup="validateEmail()"/>
                     <span id="errEmail"></span>  
                 </div>
-                <div class="infield">
+                <div class="infield" style="margin-top: 30px;margin-bottom: 15px;">
                     <input type="password" id="password" placeholder="Password" name="password" onkeyup="validatePassword()"/>
                     <span id="errPassword"></span>
                 </div>
@@ -75,42 +78,100 @@
                   <span style="color: crimson; padding-top: 20px;"><%= message %></span>
                   <% } %>
             </form>
-        </div>
-        <div class="overlay-container" id="overlayCon">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button>Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button>Sign Up</button>
-                </div>
+
+
+
+
+              
             </div>
-            <button id="overlayBtn"></button>
+
+            <div class="cont_form_sign_up">
+              <a href="#" onclick="ocultar_login_sign_up()"
+                ><i class="material-icons">&#xE5C4;</i></a
+              >
+              <!-- <h2>SIGN UP</h2>
+              <input type="text" placeholder="Email" />
+              <input type="text" placeholder="User" />
+              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Confirm Password" />
+              <button class="btn_sign_up" onclick="cambiar_sign_up()">
+                SIGN UP
+              </button> -->
+
+
+
+              <form action="/register" method="post" onsubmit="return validateSignup()">
+                <h1>Create Account</h1>
+               
+                <span style="color: black;">use your email for registration</span>
+                <div class="infield"style="margin-top: 30px;" >
+                    <input style="margin-top: 20px;" class="in" type="text" placeholder="Name" name="name" id="name" onkeyup="validateName()" />
+                    <span id="errName"></span>
+                </div>
+                <div class="infield"style="margin-top: 30px;">
+                    <input class="in" type="text" placeholder="Email" name="email" id="email" onkeyup="validateEmail()" />
+                    <span id="errEmail"></span>  
+                </div>
+                <div class="infield"style="margin-top: 30px;">
+                    <input class="in" type="text" placeholder="mobile no" name="mno" id="number" onkeyup="validateNumber()" />
+                    <span id="errNumber"></span>
+                </div>
+                <div class="infield"style="margin-top: 30px;margin-bottom:20px">
+                    <input class="in" type="password" placeholder="Password" name="password" id="password" onkeyup="validatePassword()" />
+                    <span id="errPassword"></span>
+                </div>
+                <button type="submit" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">Sign Up</button>
+            </form>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <footer>
-    </footer>
-    
-    <!-- js code -->
-    <script>
-        const container = document.getElementById('container');
-        const overlayCon = document.getElementById('overlayCon');
-        const overlayBtn = document.getElementById('overlayBtn');
+  </body>
+  <script>
+    /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
+---------------------------------------
+*/
 
-        overlayBtn.addEventListener('click', () => {
-            container.classList.toggle('right-panel-active');
+    function cambiar_login() {
+      document.querySelector(".cont_forms").className =
+        "cont_forms cont_forms_active_login";
+      document.querySelector(".cont_form_login").style.display = "block";
+      document.querySelector(".cont_form_sign_up").style.opacity = "0";
 
-            overlayBtn.classList.remove('btnScaled');
-            window.requestAnimationFrame(() => {
-                overlayBtn.classList.add('btnScaled');
-            })
-        });
+      setTimeout(function () {
+        document.querySelector(".cont_form_login").style.opacity = "1";
+      }, 400);
 
-    </script>
-<script src="validation.js"></script>
-</body>
+      setTimeout(function () {
+        document.querySelector(".cont_form_sign_up").style.display = "none";
+      }, 200);
+    }
+
+    function cambiar_sign_up(at) {
+      document.querySelector(".cont_forms").className =
+        "cont_forms cont_forms_active_sign_up";
+      document.querySelector(".cont_form_sign_up").style.display = "block";
+      document.querySelector(".cont_form_login").style.opacity = "0";
+
+      setTimeout(function () {
+        document.querySelector(".cont_form_sign_up").style.opacity = "1";
+      }, 100);
+
+      setTimeout(function () {
+        document.querySelector(".cont_form_login").style.display = "none";
+      }, 400);
+    }
+
+    function ocultar_login_sign_up() {
+      document.querySelector(".cont_forms").className = "cont_forms";
+      document.querySelector(".cont_form_sign_up").style.opacity = "0";
+      document.querySelector(".cont_form_login").style.opacity = "0";
+
+      setTimeout(function () {
+        document.querySelector(".cont_form_sign_up").style.display = "none";
+        document.querySelector(".cont_form_login").style.display = "none";
+      }, 500);
+    }
+  </script>
 </html>

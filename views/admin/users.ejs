@@ -28,6 +28,13 @@
         <span>Category Management</span>
       </a>
     </li>
+    
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/banners">
+        <i class="bi bi-grid"></i>
+        <span>banner Management</span>
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link " href="/admin/dashboard">
         <i class="bi bi-grid"></i>
@@ -88,7 +95,6 @@
                   <th scope="col">Names</th>
                   <th scope="col">Email</th>
                   <th scope="col">Mobile</th>
-                  <th scope="col">Status</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>
@@ -106,7 +112,7 @@
                       <td>
                         <%= users[i].mobile %>
                       </td>
-                      <td>
+                      <!-- <td>
                         <% if(users[i].is_verified){ if(users[i].status==1){ %>
                           <span class="badge bg-label-success me-1">Online</span>
                           <% } else{ %>
@@ -114,7 +120,7 @@
                             <% }}else { %>
                               <span class="badge bg-label-warning me-1">Blocked</span>
                               <% } %>
-                      </td>
+                      </td> -->
                       <td>
                         <% if(users[i].is_verified){ %>
                           <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#block"
