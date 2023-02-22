@@ -3,7 +3,7 @@ const admin_route = express();
 const session = require("express-session");
 const nocache = require("nocache")
 const config = require("../config/config");
-const multer = require('../util/multer')
+// const multer = require('../util/multer')
 
 admin_route.use(session({ 
     secret: config.sessionSecret,
@@ -37,15 +37,43 @@ admin_route.post('/category',auth.isLogin, adminController.addCategory)
 admin_route.get('/deleteCategory',auth.isLogin, adminController.deleteCategory)
 admin_route.get('/editCategory',auth.isLogin, adminController.editCategory)
 
-
+//for loading products in admin view file
 admin_route.get('/products',auth.isLogin, adminController.loadProducts)
+//for adding products
 admin_route.get('/addProducts',auth.isLogin, adminController.loadAddProducts)
-admin_route.post('/addProducts',adminController.upload,adminController.addProduct)
+admin_route.post('/addProducts',adminController.upload.array('image', 10), adminController.addProduct)
+//for editing products
+
+admin_route.get('/edit-product', auth.isLogin, adminController.editUserLoad);
+admin_route.post('/edit-product',adminController.upload.array('image', 10),adminController.editProduct)
+//for deleting products
+admin_route.get('/delete-product',adminController.deleteProduct);
+//banners
+// admin_route.get('/banners',auth.isLogin, adminController.loadBanners)
+// admin_route.get('/addBanners',auth.isLogin, adminController.aadingBanner)
+// admin_route.post('/addBanners',adminController.upload1,adminController.addBanner)
 
 
+
+
+
+
+//for loading banners in admin view file
 admin_route.get('/banners',auth.isLogin, adminController.loadBanners)
-admin_route.get('/addBanners',auth.isLogin, adminController.loadAddBanners)
-admin_route.post('/addBanners',adminController.upload1,adminController.addBanner)
+//for adding banner
+admin_route.get('/addBanners',auth.isLogin, adminController. loadAddBanner)
+admin_route.post('/addBanners',adminController.upload.array('image', 10), adminController.addBanner)
+//for editing banner
+
+admin_route.get('/edit-banner', auth.isLogin, adminController.editBannerLoad);
+admin_route.post('/edit-banner',adminController.upload1.array('image', 10),adminController.editBanner)
+//for deleting banner
+admin_route.get('/delete-banner',adminController.deleteBanner);
+
+
+
+
+
 
 admin_route.get('*', function (req, res) {
     res.redirect('/admin');

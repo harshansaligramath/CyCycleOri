@@ -1,11 +1,11 @@
 const User = require("../models/userModel");
-const Category = require('../models/category')
-const Product = require('../models/product')
-const Banner=require("../models/banner")
+const Category = require("../models/category");
+const Product = require("../models/product");
+const Banner = require("../models/banner");
 const bcrypt = require("bcrypt");
 
-const multer = require('multer')
-const path =require('path')
+const multer = require("multer");
+const path = require("path");
 
 let Storage = multer.diskStorage({
   destination: "./public/admin/uploads/",
@@ -18,8 +18,7 @@ let Storage = multer.diskStorage({
 });
 let upload = multer({
   storage: Storage,
-}).single("image");
-
+});
 
 let Storage1 = multer.diskStorage({
   destination: "./public/admin/banner/",
@@ -32,13 +31,7 @@ let Storage1 = multer.diskStorage({
 });
 let upload1 = multer({
   storage: Storage1,
-}).single("image");
-
-
-
-
-
-
+})
 
 const loadLogin = async (req, res) => {
   try {
@@ -94,7 +87,6 @@ const logout = async (req, res) => {
   }
 };
 
-
 const loadUsers = async (req, res) => {
   try {
     var search = "";
@@ -111,44 +103,62 @@ const loadUsers = async (req, res) => {
         { mobile: { $regex: ".*" + search + ".*" } },
       ],
     });
-    res.render("users", { users: userData , val: search });
+    res.render("users", { users: userData, val: search });
   } catch (error) {
     console.log(error.message);
   }
 };
-const blockUser = async (req , res) => {
+const blockUser = async (req, res) => {
   try {
     const id = req.query.id;
     const userData = await User.findOne({ _id: id });
-    if(userData.is_verified){
-      const userData = await User.findByIdAndUpdate({_id:id},{$set:{is_verified:0}}); console.log("blocked");
-    }else {await User.findByIdAndUpdate({_id:id},{$set:{is_verified:1}});} console.log("unblocked");
+    if (userData.is_verified) {
+      const userData = await User.findByIdAndUpdate(
+        { _id: id },
+        { $set: { is_verified: 0 } }
+      );
+      console.log("blocked");
+    } else {
+      await User.findByIdAndUpdate({ _id: id }, { $set: { is_verified: 1 } });
+    }
+    console.log("unblocked");
     res.redirect("/admin/users");
   } catch (error) {
     console.log(error);
   }
-}
+};
 const loadCategory = async (req, res) => {
   try {
     var search = "";
     if (req.query.search) {
       search = req.query.search;
     }
-    const categoryData = await Category.find({isAvailable:1, name: { $regex: ".*" + search + ".*" } });
+    const categoryData = await Category.find({
+      isAvailable: 1,
+      name: { $regex: ".*" + search + ".*" },
+    });
     console.log(categoryData);
-    res.render("category", { category: categoryData , val: search ,message:undefined });
+    res.render("category", {
+      category: categoryData,
+      val: search,
+      message: undefined,
+    });
   } catch (error) {
     console.log(error);
   }
 };
 const addCategory = async (req, res) => {
   console.log(req.body);
-  const categoryData = await Category.findOne( { name: req.body.category})
-  const categoryAll =await Category.find()
+  const categoryData = await Category.findOne({ name: req.body.category });
+  const categoryAll = await Category.find();
   console.log(categoryData);
-  if(categoryData){
-    res.render('category', { category:categoryAll, val:'', message: 'category already Exists'})
-  } else{
+  if (categoryData) {
+    res.render("category", {
+      category: categoryAll,
+      val: "",
+      message: "category already Exists",
+    });
+  } else {
     try {
       const category = Category({
         name: req.body.category,
@@ -160,118 +170,332 @@ const addCategory = async (req, res) => {
     }
   }
 };
-const editCategory = async (req,res) => {
-try {
-  const id = req.query.id
-  const category = await  Category.findOne({_id: id})
-  if(category){
-  const categoryData = await  Category.updateOne({_id: id},{$set: {name:req.body.category}})
+const editCategory = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const category = await Category.findOne({ _id: id });
+    if (category) {
+      const categoryData = await Category.updateOne(
+        { _id: id },
+        { $set: { name: req.body.category } }
+      );
+    }
+  } catch (error) {
+    console.log(error);
   }
-} catch (error) {
-  console.log(error);
-}
-}
+};
 const deleteCategory = async (req, res) => {
   try {
     const id = req.query.id;
-    const catagoryData = await Category.updateOne({_id: id},{$set: {isAvailable:0}})
-    
+    const catagoryData = await Category.updateOne(
+      { _id: id },
+      { $set: { isAvailable: 0 } }
+    );
+
     res.redirect("category");
   } catch (error) {
     console.log(error.message);
   }
 };
+
+//for loading products in admin view file
+
 const loadProducts = async (req, res) => {
   try {
     const productData = await Product.find();
-    res.render("product", { products:productData });  
+    res.render("product", { products: productData });
   } catch (error) {
     console.log(error.message);
   }
 };
+//for loading products in admin view file get
 const loadAddProducts = async (req, res) => {
   try {
     const categoryData = await Category.find();
-    res.render("addProducts", { category: categoryData });  
+    res.render("addProducts", { category: categoryData });
   } catch (error) {
     console.log(error.message);
   }
-}; 
+};
+//for loading products in admin view file post
+
 const addProduct = async (req, res) => {
   try {
     const categoryData = await Category.find();
-    console.log(req.file);
+    console.log(req.files);
     const product = Product({
-      name: req.body.name, 
+      name: req.body.name,
       price: req.body.price,
       description: req.body.description,
       stock: req.body.stock,
       category: req.body.category,
-      image:req.file.filename
+      image: req.files.map((x)=>x.filename),
     });
-      console.log(product);
+    console.log(product);
     const productData = await product.save();
     if (productData) {
       res.render("product", {
         message: "registration successfull.",
         category: categoryData,
-        products:productData 
+        products: productData,
       });
     } else {
-      res.render("product", { message: "registration failed", products:productData  });
+      res.render("product", {
+        message: "registration failed",
+        products: productData,
+      });
     }
   } catch (error) {
     console.log(error.message);
   }
 };
 
+//for editing products method get
+
+const editUserLoad = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const category = await Category.find();
+
+    const userData = await Product.findById({ _id: id });
+    if (userData) {
+      res.render("editProducts", { product: userData, category: category });
+    } else {
+      res.redirect("editProducts");
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const editProduct = async (req, res) => {
+  try {
+    console.log(req.files);
+    if (req.files.length != 0) {
+      product = await Product.updateOne(
+        { _id: req.query.id },
+        {
+          $set: {
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            stock: req.body.stock,
+            category: req.body.category,
+            image: req.files.map((x) => x.filename),
+          },
+        }
+      );
+    } else {
+      product = await Product.updateOne(
+        { _id: req.query.id },
+        {
+          $set: {
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            stock: req.body.stock,
+            category: req.body.category,
+          },
+        }
+      );
+    }
+    console.log(product);
+    const productData = await Product.find();
+    if (product) {
+      res.render("product", {
+        message: "registration successfull.",
+        products: productData,
+        active: 4,
+      });
+    } else {
+      res.render("product", {
+        message: "registration failed",
+        products: productData,
+        active: 4,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+//delete product
+const deleteProduct = async (req, res) => {
+  try {
+    const id = req.query.id;
+    await Product.deleteOne({ _id: id });
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const categoryData = await Category.findByIdAndUpdate(
+      { _id: req.body.id },
+      {
+        $set: {
+          name: req.body.name,
+          category: req.body.category,
+          description: req.body.description,
+          price: req.body.price,
+          stock: req.body.stock,
+          image: req.body.image,
+        },
+      }
+    );
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 
+//for loading products in admin view file
 
 const loadBanners = async (req, res) => {
   try {
-    const productData = await Banner.find();
-    res.render("banner", { products:productData });  
+    const bannerData = await Banner.find();
+    res.render("banner", { banners: bannerData });
   } catch (error) {
     console.log(error.message);
   }
 };
-const loadAddBanners = async (req, res) => {
+//for loading products in admin view file get
+const loadAddBanner = async (req, res) => {
   try {
-    const categoryData = await Category.find();
-    res.render("addBanner", { category: categoryData });  
+    // const categoryData = await Category.find();
+    res.render("addBanner",);
   } catch (error) {
     console.log(error.message);
   }
 };
+//for loading products in admin view file post
+
 const addBanner = async (req, res) => {
   try {
-    const categoryData = await Category.find();
+    // const categoryData = await Category.find();
     console.log(req.file);
-    const banner = Banner({
-      name: req.body.name, 
+    const product = Banner({
+      name: req.body.name,
       price: req.body.price,
       description: req.body.description,
-      // stock: req.body.stock,
-      category: req.body.category,
-      image:req.file.filename
+      image: req.files.map((x) => x.filename),
     });
-      console.log(banner);
-    const bannerData = await banner.save();
-    if (bannerData) {
+    console.log(product);
+    const productData = await product.save();
+    if (productData) {
       res.render("banner", {
         message: "registration successfull.",
-        category: categoryData,
-        banners:bannerData ,
-        products:bannerData 
+        products: productData,
       });
     } else {
-      res.render("banner", { message: "registration failed", products:bannerData  });
+      res.render("banner", {
+        message: "registration failed",
+        products: productData,
+      });
     }
   } catch (error) {
     console.log(error.message);
   }
 };
+
+//for editing products method get
+
+const editBannerLoad = async (req, res) => {
+  try {
+    const id = req.query.id;
+
+    const userData = await Banner.findById({ _id: id });
+    if (userData) {
+      res.render("editBanner", { product: userData});
+    } else {
+      res.redirect("editBanner");
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+const editBanner = async (req, res) => {
+  try {
+    if (req.files.length != 0) {
+      product = await Banner.updateOne(
+        { _id: req.query.id },
+        {
+          $set: {
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            image: req.files.map((x) => x.filename),
+          },
+        }
+      );
+    } else {
+      product = await Banner.updateOne(
+        { _id: req.query.id },
+        {
+          $set: {
+            name: req.body.name,
+            price: req.body.price,
+            description: req.body.description,
+            image: req.files.map((x) => x.filename),
+
+          },
+        }
+      );
+    }
+    console.log(product);
+    const productData = await Banner.find();
+    if (product) {
+      res.render("banner", {
+        message: "registration successfull.",
+        products: productData,
+        active: 4,
+      });
+    } else {
+      res.render("banner", {
+        message: "registration failed",
+        products: productData,
+        active: 4,
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+//delete product
+const deleteBanner = async (req, res) => {
+  try {
+    const id = req.query.id;
+    await Banner.deleteOne({ _id: id });
+    res.redirect("/admin/dashboard");
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -291,13 +515,16 @@ module.exports = {
   deleteCategory,
   upload,
   upload1,
+  editUserLoad,
+  updateUser,
+  editProduct,
+  deleteProduct,
+  //banners
   loadBanners,
-  loadAddBanners,
+  loadAddBanner,
   addBanner,
-  loadAddBanners
-
-};
+  editBannerLoad,
+  editBanner,
+  deleteBanner
  
-
-
-
+};

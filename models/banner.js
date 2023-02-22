@@ -6,10 +6,7 @@ const bannerSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    category:{
-        type:String,
-        required:true
-    },
+    
     description:{
         type:String,
         required:true
@@ -18,12 +15,9 @@ const bannerSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    stock:{
-        type:Number,
-        required:true
-    },
+   
     image:{
-        type:String,
+        type:Array,
     },
     isAvailable:{
         type:Number,
