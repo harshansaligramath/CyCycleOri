@@ -62,8 +62,9 @@ admin_route.get('/delete-product',adminController.deleteProduct);
 admin_route.get('/banners',auth.isLogin, adminController.loadBanners)
 //for adding banner
 admin_route.get('/addBanners',auth.isLogin, adminController. loadAddBanner)
-admin_route.post('/addBanners',adminController.upload.array('image', 10), adminController.addBanner)
+admin_route.post('/addBanners',adminController.upload1.array('image', 10), adminController.addBanner)
 //for editing banner
+
 
 admin_route.get('/edit-banner', auth.isLogin, adminController.editBannerLoad);
 admin_route.post('/edit-banner',adminController.upload1.array('image', 10),adminController.editBanner)

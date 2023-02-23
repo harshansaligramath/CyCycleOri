@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyCycle</title>
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="assets/css/login.css">
+    <style> span{color: red; height: 20px;} </style>
+</head>
+
+<body>
+    
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form action="/register" method="post" onsubmit="return validateSignup()">
+                <h1>Sign Up</h1>
+
+                <span style="color: black;">provide credentials to login</span>
+                    
+                    <div class="login__field">
+                        <!-- <i class="login__icon fas fa-user"></i> -->
+                        <input  type="text" placeholder="Name" name="name" id="name" onkeyup="validateName()">
+                    <span id="errName"></span>
+                          
+                    </div>
+                    <div class="login__field">
+                        <!-- <i class="login__icon fas fa-lock"></i> -->
+                        <input   type="text" placeholder="Email" name="email" id="email" onkeyup="validateEmail()">
+                    <span id="errEmail"></span>  
+                      
+                   
+                    </div>
+
+
+                    <div class="login__field">
+                        <!-- <i class="login__icon fas fa-lock"></i> -->
+                        <input  type="text" placeholder="mobile no" name="mno"  onkeyup="validateNumber()">
+                        <span id="errNumber"></span>
+                   
+                   
+                    </div>
+                    <div class="login__field">
+                        <!-- <i class="login__icon fas fa-lock"></i> -->
+                        <input   type="password" placeholder="Password" name="password" id="password" onkeyup="validatePassword()">
+                    <span id="errPassword"></span>
+                        
+                   
+                    </div>
+
+
+                    <button button type="submit" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">
+                        <span class="button__text">register</span>
+                        <!-- <i class="button__icon fas fa-chevron-right"></i> -->
+                    </button>
+                    <% if(typeof message !=='undefined' ){ %>
+                        <span style="color: crimson; padding-top: 20px;"><%= message %></span>
+                        <% } %>				
+                </form>
+                <div class="social-login">
+                    <h3>log in via</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-login__icon fab fa-instagram"></a>
+                        <a href="#" class="social-login__icon fab fa-facebook"></a>
+                        <a href="#" class="social-login__icon fab fa-twitter"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>		
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>		
+        </div>
+    </div>
+
+    <footer>
+    </footer>
+    
+    <!-- js code -->
+    <script>
+        const container = document.getElementById('container');
+        const overlayCon = document.getElementById('overlayCon');
+        const overlayBtn = document.getElementById('overlayBtn');
+
+        overlayBtn.addEventListener('click', () => {
+            container.classList.toggle('right-panel-active');
+
+            overlayBtn.classList.remove('btnScaled');
+            window.requestAnimationFrame(() => {
+                overlayBtn.classList.add('btnScaled');
+            })
+        });
+
+    </script>
+<script src="validation.js"></script>
+</body>
+</html>

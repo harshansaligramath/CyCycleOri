@@ -1,177 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyCycle</title>
-    <link rel="stylesheet" href="assets/css/login.css" />
-  </head>
-  <body>
-    <div class="cotn_principal <% if(active){ %> right-panel-active <% } %>">
-      <div class="cont_centrar">
-        <div class="cont_login">
-          <div class="cont_info_log_sign_up">
-            <div class="col_md_login">
-              <div class="cont_ba_opcitiy">
-                <h2>LOGIN</h2>
-                <p></p>
-                <button class="btn_login" onclick="cambiar_login()">
-                  LOGIN
-                </button>
-              </div>
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="assets/css/login.css">
+    <style> span{color: red; height: 20px;} </style>
+</head>
+
+<body>
+    
+
+        <div class="container">
+            <div class="screen">
+                <div class="screen__content">
+                    <form action="/login" class="login" method="post">
+                    <h1>Sign in</h1>
+    
+                    <span style="color: black;">provide credentials to login</span>
+                        
+                        <div class="login__field">
+                            <i class="login__icon fas fa-user"></i>
+                            <input id="email" type="text" placeholder="Email" name="email" onkeyup="validateEmail()">
+                            <span id="errEmail"></span>  
+                       
+                        </div>
+                        <div class="login__field">
+                            <i class="login__icon fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Password" name="password" onkeyup="validatePassword()">
+                            <span id="errPassword"></span>
+                       
+                        </div>
+                    <a href="#" class="forgot">Forgot your password?</a>
+    
+                        <button type="submit" onclick="validateEmail(), validatePassword()" class="button login__submit">
+                            <span class="button__text">Log In</span>
+                            <i class="button__icon fas fa-chevron-right"></i>
+                        </button>
+
+                    <a href="/register" class="forgot">Sign Up</a>
+
+                        <% if(typeof message !=='undefined' ){ %>
+                            <span style="color: crimson; padding-top: 20px;"><%= message %></span>
+                            <% } %>				
+                    </form>
+                    <div class="social-login">
+                        <h3>log in via</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-login__icon fab fa-instagram"></a>
+                            <a href="#" class="social-login__icon fab fa-facebook"></a>
+                            <a href="#" class="social-login__icon fab fa-twitter"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen__background">
+                    <span class="screen__background__shape screen__background__shape4"></span>
+                    <span class="screen__background__shape screen__background__shape3"></span>		
+                    <span class="screen__background__shape screen__background__shape2"></span>
+                    <span class="screen__background__shape screen__background__shape1"></span>
+                </div>		
             </div>
-            <div class="col_md_sign_up">
-              <div class="cont_ba_opcitiy">
-                <h2>SIGN UP</h2>
-
-                <p></p>
-
-                <button class="btn_sign_up" onclick="cambiar_sign_up()">
-                  SIGN UP
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div class="cont_back_info">
-            <div class="cont_img_back_grey">
-              <img
-                src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="cont_forms">
-            <div class="cont_img_back_">
-              <img
-                src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
-                alt=""
-              />
-            </div>
-            <div class="cont_form_login">
-              <a href="#" onclick="ocultar_login_sign_up()"
-                ></a
-              >
-              <!-- <h2>LOGIN</h2>
-              <input type="text" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <button class="btn_login" onclick="cambiar_login()">LOGIN</button> -->
-
-              <form action="/login"  method="post">
-                <h1>Sign in</h1>
-                <div class="social-container">
-                    
-                </div>
-                <span style="color: black;">provide credentials to login</span>
-                <div class="infield" style="margin-top: 30px;">
-                    <input id="email" type="text" placeholder="Email" name="email" onkeyup="validateEmail()"/>
-                    <span id="errEmail"></span>  
-                </div>
-                <div class="infield" style="margin-top: 30px;margin-bottom: 15px;">
-                    <input type="password" id="password" placeholder="Password" name="password" onkeyup="validatePassword()"/>
-                    <span id="errPassword"></span>
-                </div>
-                <a href="#" class="forgot">Forgot your password?</a>
-                <button type="submit" onclick="validateEmail(), validatePassword()">Login</button>
-                <% if(typeof message !=='undefined' ){ %>
-                  <span style="color: crimson; padding-top: 20px;"><%= message %></span>
-                  <% } %>
-            </form>
-
-
-
-
-              
-            </div>
-
-            <div class="cont_form_sign_up">
-              <a href="#" onclick="ocultar_login_sign_up()"
-                ><i class="material-icons">&#xE5C4;</i></a
-              >
-              <!-- <h2>SIGN UP</h2>
-              <input type="text" placeholder="Email" />
-              <input type="text" placeholder="User" />
-              <input type="password" placeholder="Password" />
-              <input type="password" placeholder="Confirm Password" />
-              <button class="btn_sign_up" onclick="cambiar_sign_up()">
-                SIGN UP
-              </button> -->
-
-
-
-              <form action="/register" method="post" onsubmit="return validateSignup()">
-                <h1>Create Account</h1>
-               
-                <span style="color: black;">use your email for registration</span>
-                <div class="infield"style="margin-top: 30px;" >
-                    <input style="margin-top: 20px;" class="in" type="text" placeholder="Name" name="name" id="name" onkeyup="validateName()" />
-                    <span id="errName"></span>
-                </div>
-                <div class="infield"style="margin-top: 30px;">
-                    <input class="in" type="text" placeholder="Email" name="email" id="email" onkeyup="validateEmail()" />
-                    <span id="errEmail"></span>  
-                </div>
-                <div class="infield"style="margin-top: 30px;">
-                    <input class="in" type="text" placeholder="mobile no" name="mno" id="number" onkeyup="validateNumber()" />
-                    <span id="errNumber"></span>
-                </div>
-                <div class="infield"style="margin-top: 30px;margin-bottom:20px">
-                    <input class="in" type="password" placeholder="Password" name="password" id="password" onkeyup="validatePassword()" />
-                    <span id="errPassword"></span>
-                </div>
-                <button type="submit" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">Sign Up</button>
-            </form>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </body>
-  <script>
-    /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
----------------------------------------
-*/
 
-    function cambiar_login() {
-      document.querySelector(".cont_forms").className =
-        "cont_forms cont_forms_active_login";
-      document.querySelector(".cont_form_login").style.display = "block";
-      document.querySelector(".cont_form_sign_up").style.opacity = "0";
 
-      setTimeout(function () {
-        document.querySelector(".cont_form_login").style.opacity = "1";
-      }, 400);
+    <footer>
+    </footer>
+    
+    <!-- js code -->
+    <script>
+        const container = document.getElementById('container');
+        const overlayCon = document.getElementById('overlayCon');
+        const overlayBtn = document.getElementById('overlayBtn');
 
-      setTimeout(function () {
-        document.querySelector(".cont_form_sign_up").style.display = "none";
-      }, 200);
-    }
+        overlayBtn.addEventListener('click', () => {
+            container.classList.toggle('right-panel-active');
 
-    function cambiar_sign_up(at) {
-      document.querySelector(".cont_forms").className =
-        "cont_forms cont_forms_active_sign_up";
-      document.querySelector(".cont_form_sign_up").style.display = "block";
-      document.querySelector(".cont_form_login").style.opacity = "0";
+            overlayBtn.classList.remove('btnScaled');
+            window.requestAnimationFrame(() => {
+                overlayBtn.classList.add('btnScaled');
+            })
+        });
 
-      setTimeout(function () {
-        document.querySelector(".cont_form_sign_up").style.opacity = "1";
-      }, 100);
-
-      setTimeout(function () {
-        document.querySelector(".cont_form_login").style.display = "none";
-      }, 400);
-    }
-
-    function ocultar_login_sign_up() {
-      document.querySelector(".cont_forms").className = "cont_forms";
-      document.querySelector(".cont_form_sign_up").style.opacity = "0";
-      document.querySelector(".cont_form_login").style.opacity = "0";
-
-      setTimeout(function () {
-        document.querySelector(".cont_form_sign_up").style.display = "none";
-        document.querySelector(".cont_form_login").style.display = "none";
-      }, 500);
-    }
-  </script>
+    </script>
+<script src="validation.js"></script>
+</body>
 </html>

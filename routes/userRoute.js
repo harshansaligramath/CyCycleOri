@@ -35,10 +35,15 @@ user_route.post("/login", userController.verifyLogin);
 user_route.get("/logout", auth.isLogin, userController.userLogout);
 
 user_route.get("/register", auth.isLogout, userController.loadRegister);
-user_route.post("/register", userController.insertUser);
+// user_route.post("/register", userController.insertUser);
+user_route.post("/register",userController.loadOtp);
+user_route.get('/resendOtp', userController.resendOtp)
+user_route.post('/verifyOtp',userController.verifyOtp)
+
 
 // user_route.get("/productShow", auth.isLogout, userController.loadProducts);
 user_route.get("/productShow", userController.loadProducts);
+// user_route.get("/", userController.loadBannerDatas);
 
 
 module.exports = user_route;

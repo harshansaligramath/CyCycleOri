@@ -365,7 +365,6 @@ const loadBanners = async (req, res) => {
 //for loading products in admin view file get
 const loadAddBanner = async (req, res) => {
   try {
-    // const categoryData = await Category.find();
     res.render("addBanner",);
   } catch (error) {
     console.log(error.message);
@@ -386,7 +385,7 @@ const addBanner = async (req, res) => {
     console.log(product);
     const productData = await product.save();
     if (productData) {
-      res.render("banner", {
+      res.render("dashboard", {
         message: "registration successfull.",
         products: productData,
       });

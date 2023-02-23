@@ -77,30 +77,26 @@
     </thead>
     <tbody>
       <% if(banners.length> 0){ %>
-          <% for(let i=1;i <=banners.length; i++){ %>
-            <% if(banners[i-1].isAvailable==1){ %>
-              <tr>
-                <th>
-                  <%= i %>
-                </th>
-                <td>
-                  <%= banners[i-1].name %>
-                </td>
-                
-                <td>
-                  <%= banners[i-1].price %>
-                </td>
-                <td>
-                  <%= banners[i-1].description %>
-                </td>
-                
-                <td>
-                  <% if(banners[i-1].image) { %>
-                  
-                    <img src="/admin/banner/<%= banners[i-1].image %>" width="100vw" height="100vh">
-                    <% }else{ %>
-                      Image Not Found
-                    <% } %>
+        <% for(let i=1;i <=banners.length; i++){ %>
+          <% if(banners[i-1].isAvailable==1){ %>
+            <tr>
+              <th>
+                <%= i %>
+              </th>
+              <td>
+                <%= banners[i-1].name %>
+              </td>
+             
+              <td>
+                <%= banners[i-1].price %>
+              </td>
+             
+              <td>
+                <% if(banners[i-1].image) { %>
+                  <img src="/admin/banner/<%= banners[i-1].image %>" width="100vw" height="100vh">
+                  <% }else{ %>
+                    Image Not Found
+                  <% } %>
                 </td>
                 <td>
                   <a class="text-success" href="/admin/edit-banner?id=<%= banners[i-1]._id %>"><i
