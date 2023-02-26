@@ -1,10 +1,60 @@
 <%- include ('../layouts/adminHeader.ejs') %>
 
-        <div class="layout-page">
-          
-          <div >
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/products">
+        <i class="bi bi-grid"></i>
+        <span>Product</span>
+      </a>
+    </li><li class="nav-item">
+      <a class="nav-link " href="/admin/users">
+        <i class="bi bi-grid"></i>
+        <span>User</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/category">
+        <i class="bi bi-grid"></i>
+        <span>Category</span>
+      </a>
+    </li>
+
+
+   
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/banners">
+        <i class="bi bi-grid"></i>
+        <span>banner</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="/admin/dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Order and Payment</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " href="index.html">
+        <i class="bi bi-grid"></i>
+        <span>Sales Report</span>
+      </a>
+    </li>
+       
+    
+  </ul>
+
+</aside>
             <!-- <form action="/admin/edit-product?id=<%-product._id%>" method="post" enctype="multipart/form-data"> -->
-            <div >
+            <div style="padding-left: 30%;padding-right: 5%;">
             <form action="/admin/edit-product?id=<%-product._id%>" method="post" enctype="multipart/form-data">
             <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -60,7 +110,7 @@
               <h5 class="card-title">File input</h5>
                 <div class="mb-3">
                   <label for="formFileMultiple" class="form-label">Select image to upload</label>
-                  <input class="form-control" name="image" type="file" id="image" multiple />
+                  <input class="form-control" accept="image/*" name="image" type="file" id="image" multiple required />
                 </div>
               
               </div>
@@ -68,7 +118,7 @@
             </div>
             </div>   
             <div class="buy-now">
-              <button type="submit"  class="btn btn-danger btn-buy-now">SAVE PRODUCT</button>
+              <button type="submit"  class="btn btn-success btn-buy-now">SAVE PRODUCT</button>
             </div> 
             </form>      
           </div>

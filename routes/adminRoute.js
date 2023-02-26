@@ -33,9 +33,13 @@ admin_route.get('/users', auth.isLogin, adminController.loadUsers);
 admin_route.get('/block',adminController.blockUser)
 
 admin_route.get('/category',auth.isLogin, adminController.loadCategory)
-admin_route.post('/category',auth.isLogin, adminController.addCategory)
+admin_route.get('/addCategory',auth.isLogin, adminController.loadAddCategories)
+admin_route.post('/addCategory',auth.isLogin, adminController.addCategory)
+admin_route.get('/blockCategory',adminController.blockCategory)
+
 admin_route.get('/deleteCategory',auth.isLogin, adminController.deleteCategory)
-admin_route.get('/editCategory',auth.isLogin, adminController.editCategory)
+admin_route.get('/editCategory',auth.isLogin, adminController.editCategoryLoad)
+admin_route.post('/edit-category',auth.isLogin, adminController.editCategory)
 
 //for loading products in admin view file
 admin_route.get('/products',auth.isLogin, adminController.loadProducts)
@@ -47,16 +51,8 @@ admin_route.post('/addProducts',adminController.upload.array('image', 10), admin
 admin_route.get('/edit-product', auth.isLogin, adminController.editUserLoad);
 admin_route.post('/edit-product',adminController.upload.array('image', 10),adminController.editProduct)
 //for deleting products
+admin_route.get('/blockProduct',adminController.blockProduct)
 admin_route.get('/delete-product',adminController.deleteProduct);
-//banners
-// admin_route.get('/banners',auth.isLogin, adminController.loadBanners)
-// admin_route.get('/addBanners',auth.isLogin, adminController.aadingBanner)
-// admin_route.post('/addBanners',adminController.upload1,adminController.addBanner)
-
-
-
-
-
 
 //for loading banners in admin view file
 admin_route.get('/banners',auth.isLogin, adminController.loadBanners)

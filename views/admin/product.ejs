@@ -79,7 +79,6 @@
     <tbody>
       <% if(products.length> 0){ %>
           <% for(let i=1;i <=products.length; i++){ %>
-            <% if(products[i-1].isAvailable==1){ %>
               <tr>
                 <th>
                   <%= i %>
@@ -107,13 +106,26 @@
                   <a class="text-success" href="/admin/edit-product?id=<%= products[i-1]._id %>"><i
                       style="color: green;" class="m-r-5 mdi mdi-border-color"></i>Edit</a><br>
 
+                      <% if(products[i-1].isAvailable){ %>
+                
+                        <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#block"
+                          onclick="del('<%- products[i-1]._id %>')">Block</button>
+                        <a id='<%- products[i-1]._id %>' href="/admin/blockProduct?id=<%= products[i-1]._id %>"
+                          style="display: none">Block</a>
+                        <% } else{ %>
+                          <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#unBlock"
+                            onclick="del('<%- products[i-1]._id %>')">UnBlock</button>
+                          <a id='<%- products[i-1]._id %>' href="/admin/blockProduct?id=<%= products[i-1]._id %>"
+                            style="display: none">UnBlock</a>
+                          <% } %>
+
+
                   <a onclick="return confirm('do you want to delete?')" class="text-danger"
                     href="/admin/delete-product?id=<%= products[i-1]._id %>"><i style="color: #ff0000;"
                       class="m-r-5 mdi mdi-border-color"></i>Delete</a><br>
                 </td>
 
               </tr>
-              <% } %>
                 <% } } else{ %>
                   <tr>
                     <td colspan="5">Products Not Found</td>
@@ -128,6 +140,8 @@
 
 </div>
 </div>
+
+
           <%- include ('../layouts/adminFooter.ejs') %>
            
 

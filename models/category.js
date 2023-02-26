@@ -8,7 +8,16 @@ const categorySchema = new mongoose.Schema({
     isAvailable:{
         type:Number,
         default:1
-    }
+    },
+    is_verified: {
+        type: Number,
+        required: true,
+        default:1
+    },
+    is_admin: {
+        type: Number,
+        required: true
+    },
 })
 
 module.exports = mongoose.model('Category',categorySchema)

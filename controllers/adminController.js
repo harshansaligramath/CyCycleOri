@@ -127,33 +127,75 @@ const blockUser = async (req, res) => {
     console.log(error);
   }
 };
+
 const loadCategory = async (req, res) => {
   try {
     var search = "";
     if (req.query.search) {
+      // console.log("re"+req.query);
       search = req.query.search;
+      // console.log("search:"+search);
     }
-    const categoryData = await Category.find({
-      isAvailable: 1,
-      name: { $regex: ".*" + search + ".*" },
+    const userData = await Category.find({
+     
+      $or: [
+        { name: { $regex: ".*" + search + ".*" } },
+       
+      ],
     });
-    console.log(categoryData);
-    res.render("category", {
-      category: categoryData,
-      val: search,
-      message: undefined,
-    });
+    res.render("category", { users: userData, val: search });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+// const loadCategory = async (req, res) => {
+//   try {
+//     const categoryData = await Category.find({isAvailable:1});
+//     res.render("category", { category: categoryData });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+//block category
+const blockCategory = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const userData = await Category.findOne({ _id: id });
+    if (userData.isAvailable ==1) {
+      const userData = await Category.findByIdAndUpdate(
+        { _id: id },
+        { $set: { isAvailable: 0 } }
+      );
+      console.log("blocked");
+    } else {
+      await Category.findByIdAndUpdate({ _id: id }, { $set: { isAvailable: 1 } });
+    }
+    console.log("unblocked");
+    res.redirect("/admin/category");
   } catch (error) {
     console.log(error);
   }
 };
+
+//for loading categories in admin view file get
+const loadAddCategories = async (req, res) => {
+  try {
+    const categoryData = await Category.find();
+    res.render("addCategory", { category: categoryData });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+//for adding categories in admin view file post
+
 const addCategory = async (req, res) => {
-  console.log(req.body);
   const categoryData = await Category.findOne({ name: req.body.category });
   const categoryAll = await Category.find();
   console.log(categoryData);
-  if (categoryData) {
-    res.render("category", {
+  if (!categoryData) {
+    res.render("addCategory", {
       category: categoryAll,
       val: "",
       message: "category already Exists",
@@ -170,20 +212,36 @@ const addCategory = async (req, res) => {
     }
   }
 };
-const editCategory = async (req, res) => {
+
+//edit category
+
+
+const editCategoryLoad = async (req, res) => {
   try {
     const id = req.query.id;
-    const category = await Category.findOne({ _id: id });
-    if (category) {
-      const categoryData = await Category.updateOne(
-        { _id: id },
-        { $set: { name: req.body.category } }
-      );
+    const userData = await Category.findById({ _id: id });
+    if (userData) {
+      res.render("editCategory", { category: userData, });
+    } else {
+      res.redirect("category");
     }
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 };
+
+const editCategory = async (req, res) => {
+  try {
+    id=req.query.id;
+    const nCat= req.body.category;
+    const catagoryData = await Category.updateOne({_id:id},{$set:{name:nCat}});
+    // if(catagoryData){await Category.save();}
+    res.redirect("admin/category");
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 const deleteCategory = async (req, res) => {
   try {
     const id = req.query.id;
@@ -202,8 +260,13 @@ const deleteCategory = async (req, res) => {
 
 const loadProducts = async (req, res) => {
   try {
-    const productData = await Product.find();
-    res.render("product", { products: productData });
+    var search = "";
+    if (req.query.search) {
+      search = req.query.search;
+    }
+    const productData = await Product.find({});
+
+    res.render("product", { products: productData,val: search });
   } catch (error) {
     console.log(error.message);
   }
@@ -319,6 +382,47 @@ const editProduct = async (req, res) => {
   }
 };
 
+
+// block product
+const blockProduct = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const userData = await Product.findOne({ _id: id });
+    if (userData.isAvailable ==1) {
+      const userData = await Product.findByIdAndUpdate(
+        { _id: id },
+        { $set: { isAvailable:0 } }
+      );
+      console.log("blocked");
+    } else {
+      await Product.findByIdAndUpdate({ _id: id }, { $set: { isAvailable: 1} });
+    }
+    console.log("unblocked");
+    res.redirect("/admin/product");
+  } catch (error) {
+    console.log(error);
+  }
+};
+// const blockCategory = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     const userData = await Category.findOne({ _id: id });
+//     if (userData.isAvailable ==1) {
+//       const userData = await Category.findByIdAndUpdate(
+//         { _id: id },
+//         { $set: { isAvailable: 0 } }
+//       );
+//       console.log("blocked");
+//     } else {
+//       await Category.findByIdAndUpdate({ _id: id }, { $set: { isAvailable: 1 } });
+//     }
+//     console.log("unblocked");
+//     res.redirect("/admin/category");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 //delete product
 const deleteProduct = async (req, res) => {
   try {
@@ -329,7 +433,6 @@ const deleteProduct = async (req, res) => {
     console.log(error.message);
   }
 };
-
 const updateUser = async (req, res) => {
   try {
     const categoryData = await Category.findByIdAndUpdate(
@@ -350,10 +453,7 @@ const updateUser = async (req, res) => {
     console.log(error.message);
   }
 };
-
-
 //for loading products in admin view file
-
 const loadBanners = async (req, res) => {
   try {
     const bannerData = await Banner.find();
@@ -400,7 +500,7 @@ const addBanner = async (req, res) => {
   }
 };
 
-//for editing products method get
+//for editing banner method get
 
 const editBannerLoad = async (req, res) => {
   try {
@@ -475,29 +575,6 @@ const deleteBanner = async (req, res) => {
     console.log(error.message);
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = {
   loadLogin,
   verifyLogin,
@@ -524,6 +601,10 @@ module.exports = {
   addBanner,
   editBannerLoad,
   editBanner,
-  deleteBanner
+  deleteBanner,
+  editCategoryLoad,
+  loadAddCategories,
+  blockCategory,
+  blockProduct,
  
 };

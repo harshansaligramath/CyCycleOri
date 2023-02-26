@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CyCycle</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -19,13 +19,13 @@
 </head>
 <body>
     <form action="/verifyOtp?id=<%=otp%>" method="post" class="my-auto" style="height: 90vh;">
-        <div class="container h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-lg-12 col-xl-11">
-                    <div class="card bg-secondary" style="border-radius: 25px;">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center ">
+                <div class="col-lg-12 col-xl-8">
+                    <div class="card " style="border-radius: 25px;">
                         <div class="card-body p-md-5">
                             <div class=" row justify-content-center">
-                                <div class=" col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 " style="color: aliceblue;">
+                                <div class=" col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 " style="color: black">
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Verify Otp</p>
                                     <hr>
 
@@ -45,7 +45,7 @@
                                         <div class="d-flex ">
                                             <div style="display: flex;justify-content: space-between;">
                                                 &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                                                <button type="button" class="btn btn-primary btn-md"
+                                                <button type="button" class="btn btn-success btn-md"
                                                     id="but" style="display: none; "><a href="/resendOtp" style="color: rgb(255, 255, 255);">Resend OTP</a></button>
                                                 &nbsp; &nbsp; <span id="timer"></span>&nbsp; &nbsp; &nbsp;
                                                 <input type="submit" value="Register" class="btn btn-primary btn-md">

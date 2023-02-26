@@ -65,21 +65,7 @@
               </a>
             </div>
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                  />
-                </div>
-              </div>
-              <!-- /Search -->
-            </div>
+            
           </nav>
           <div ><form action="/admin/addProducts" method="post" enctype="multipart/form-data">
             <div class="content-wrapper">
@@ -90,18 +76,18 @@
                 <div class="mb-3 row">
                   <label for="html5-text-input" class="col-md-2 col-form-label">Product name</label>
                   <div class="col-md-10">
-                    <input class="form-control" type="text" value="Name of the products" id="html5-text-input" name="name" />
+                    <input class="form-control" type="text" value="Name of the products" id="html5-text-input" name="name" required />
                   </div>
                 </div>
                 <div class="mb-3 row">
                   <label for="html5-number-input" class="col-md-2 col-form-label">Quantity</label>
                   <div class="col-md-10">
-                    <input class="form-control" type="number" value="200" id="html5-number-input" name="stock" />
+                    <input class="form-control" type="number" value="200" id="html5-number-input" name="stock" required />
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="exampleFormControlSelect1" class="form-label">Category</label>
-                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" aria-placeholder="" name="category">
+                  <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" aria-placeholder="" name="category" >
                     <option disabled selected>select any category</option>
                     <% if(category){ %>
                       <% for(let i=1;i <= category.length; i++){ %>
@@ -117,26 +103,26 @@
                 <div class="mb-3 row">
                     <label for="exampleFormControlTextarea1" class="form-label">Product description</label>
                   <div class="col-md-10">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3" required ></textarea>
                   </div>
                 </div>
                 <div class="mb-3 row">
                   <label for="html5-number-input" class="col-md-2 col-form-label">Price</label>
                   <div class="col-md-10">
-                    <input class="form-control" type="number" name="price" value="15" id="html5-number-input" />
+                    <input class="form-control" type="number" name="price" value="15" id="html5-number-input" required />
                   </div>
                 </div>
                 <div class="mb-3 row">
                   <label for="html5-date-input" class="col-md-2 col-form-label">Date</label>
                   <div class="col-md-10">
-                    <input class="form-control" type="date" name="date" value="2022-02-17" id="html5-date-input" />
+                    <input class="form-control" type="date" name="date" value="2022-02-17" id="html5-date-input"  />
                   </div>
                 </div>
 
               <h5 class="card-title">File input</h5>
                 <div class="mb-3">
                   <label for="formFileMultiple" class="form-label">Select image to upload</label>
-                  <input class="form-control" name="image" type="file" id="formFileMultiple" multiple />
+                  <input class="form-control" accept="image/*" name="image" type="file" id="formFileMultiple" multiple required/>
                 </div>
               
               </div>
@@ -144,7 +130,7 @@
             </div>
             </div>   
             <div class="buy-now">
-              <button type="submit"  class="btn btn-danger btn-buy-now">ADD PRODUCT</button>
+              <button type="submit"  class="btn btn-success btn-buy-now">ADD PRODUCT</button>
             </div> 
             </form>      
           </div>
