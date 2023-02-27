@@ -20,18 +20,18 @@ let upload = multer({
   storage: Storage,
 });
 
-let Storage1 = multer.diskStorage({
-  destination: "./public/admin/banner/",
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-let upload1 = multer({
-  storage: Storage1,
-})
+// let Storage1 = multer.diskStorage({
+//   destination: "./public/admin/banner/",
+//   filename: (req, file, cb) => {
+//     cb(
+//       null,
+//       file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+//     );
+//   },
+// });
+// let upload1 = multer({
+//   storage: Storage1,
+// })
 
 const loadLogin = async (req, res) => {
   try {
@@ -575,6 +575,8 @@ const deleteBanner = async (req, res) => {
     console.log(error.message);
   }
 };
+
+
 module.exports = {
   loadLogin,
   verifyLogin,
@@ -590,7 +592,7 @@ module.exports = {
   editCategory,
   deleteCategory,
   upload,
-  upload1,
+  // upload1,
   editUserLoad,
   updateUser,
   editProduct,
@@ -606,5 +608,5 @@ module.exports = {
   loadAddCategories,
   blockCategory,
   blockProduct,
- 
+
 };

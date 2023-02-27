@@ -12,7 +12,12 @@ admin_route.use(session({
 }));
 
 const auth = require("../middleware/adminAuth");
-const adminController = require("../controllers/adminController");
+// const adminController = require("../controllers/adminController");
+const bannerController=require("../controllers/adminControllers/bannerController")
+const categoryController=require("../controllers/adminControllers/categoryController")
+// const dashBoardController=require("../controllers/adminControllers/dashBoardController")
+const productController=require("../controllers/adminControllers/productController")
+const usersController=require("../controllers/adminControllers/usersController")
 admin_route.use(express.static('public/admin'));
 
 admin_route.set('view engine', 'ejs');
@@ -21,51 +26,40 @@ admin_route.use(express.json());
 admin_route.use(express.urlencoded({ extended: true }));
 admin_route.use(nocache());
 
-admin_route.get('/', auth.isLogout, adminController.loadLogin);
-
-admin_route.post('/', adminController.verifyLogin);
-
-admin_route.get('/logout', auth.isLogin, adminController.logout);
-
-admin_route.get('/dashboard', auth.isLogin, adminController.loadDashboard);
-
-admin_route.get('/users', auth.isLogin, adminController.loadUsers);
-admin_route.get('/block',adminController.blockUser)
-
-admin_route.get('/category',auth.isLogin, adminController.loadCategory)
-admin_route.get('/addCategory',auth.isLogin, adminController.loadAddCategories)
-admin_route.post('/addCategory',auth.isLogin, adminController.addCategory)
-admin_route.get('/blockCategory',adminController.blockCategory)
-
-admin_route.get('/deleteCategory',auth.isLogin, adminController.deleteCategory)
-admin_route.get('/editCategory',auth.isLogin, adminController.editCategoryLoad)
-admin_route.post('/edit-category',auth.isLogin, adminController.editCategory)
-
+admin_route.get('/', auth.isLogout, usersController.loadLogin);
+admin_route.post('/', usersController.verifyLogin);
+admin_route.get('/logout', auth.isLogin, usersController.logout);
+admin_route.get('/dashboard', auth.isLogin, usersController.loadDashboard);
+admin_route.get('/users', auth.isLogin, usersController.loadUsers);
+admin_route.get('/block',usersController.blockUser)
+admin_route.get('/category',auth.isLogin, categoryController.loadCategory)
+admin_route.get('/addCategory',auth.isLogin, categoryController.loadAddCategories)
+admin_route.post('/addCategory',auth.isLogin, categoryController.addCategory)
+admin_route.get('/blockCategory',categoryController.blockCategory)
+admin_route.get('/deleteCategory',auth.isLogin, categoryController.deleteCategory)
+admin_route.get('/editCategory',auth.isLogin, categoryController.editCategoryLoad)
+admin_route.post('/edit-category',auth.isLogin, categoryController.editCategory)
 //for loading products in admin view file
-admin_route.get('/products',auth.isLogin, adminController.loadProducts)
+admin_route.get('/products',auth.isLogin, productController.loadProducts)
 //for adding products
-admin_route.get('/addProducts',auth.isLogin, adminController.loadAddProducts)
-admin_route.post('/addProducts',adminController.upload.array('image', 10), adminController.addProduct)
+admin_route.get('/addProducts',auth.isLogin, productController.loadAddProducts)
+admin_route.post('/addProducts',productController.upload.array('image', 10), productController.addProduct)
 //for editing products
-
-admin_route.get('/edit-product', auth.isLogin, adminController.editUserLoad);
-admin_route.post('/edit-product',adminController.upload.array('image', 10),adminController.editProduct)
+admin_route.get('/edit-product', auth.isLogin, productController.editUserLoad);
+admin_route.post('/edit-product',productController.upload.array('image', 10),productController.editProduct)
 //for deleting products
-admin_route.get('/blockProduct',adminController.blockProduct)
-admin_route.get('/delete-product',adminController.deleteProduct);
-
+admin_route.get('/blockProduct',productController.blockProduct)
+admin_route.get('/delete-product',productController.deleteProduct);
 //for loading banners in admin view file
-admin_route.get('/banners',auth.isLogin, adminController.loadBanners)
+admin_route.get('/banners',auth.isLogin, bannerController.loadBanners)
 //for adding banner
-admin_route.get('/addBanners',auth.isLogin, adminController. loadAddBanner)
-admin_route.post('/addBanners',adminController.upload1.array('image', 10), adminController.addBanner)
+admin_route.get('/addBanners',auth.isLogin, bannerController. loadAddBanner)
+admin_route.post('/addBanners',bannerController.upload1.array('image', 10), bannerController.addBanner)
 //for editing banner
-
-
-admin_route.get('/edit-banner', auth.isLogin, adminController.editBannerLoad);
-admin_route.post('/edit-banner',adminController.upload1.array('image', 10),adminController.editBanner)
+admin_route.get('/edit-banner', auth.isLogin, bannerController.editBannerLoad);
+admin_route.post('/edit-banner',bannerController.upload1.array('image', 10),bannerController.editBanner)
 //for deleting banner
-admin_route.get('/delete-banner',adminController.deleteBanner);
+admin_route.get('/delete-banner',bannerController.deleteBanner);
 
 
 

@@ -25,26 +25,26 @@ user_route.use(bodyParser.json());
 user_route.use(bodyParser.urlencoded({ extended: true }));
 user_route.use(nocache());
 
-const userController = require("../controllers/userController");
+// const userController = require("../controllers/userController");
+const homeController = require("../controllers/userController/homeController");
+const authenticationController = require("../controllers/userController/authenticationController");
+const productController = require("../controllers/userController/productController");
 
 
-user_route.get("/",blockUser,userController.loadHome);
-user_route.get("/login",blockUser, auth.isLogout, userController.loginLoad);
-user_route.post("/login", blockUser,userController.verifyLogin);
-user_route.get('/forget',blockUser,userController.loadforget)
-user_route.post('/forget',blockUser,userController.verifyforget)
-user_route.post('/resetPassword',blockUser,userController.resetPassword)
-user_route.get("/logout",blockUser, auth.isLogin, userController.userLogout);
-
-user_route.get("/register",blockUser, auth.isLogout, userController.loadRegister);
+user_route.get("/",blockUser,homeController.loadHome);
+user_route.get("/login",blockUser, auth.isLogout, authenticationController.loginLoad);
+user_route.post("/login", blockUser,authenticationController.verifyLogin);
+user_route.get('/forget',blockUser,authenticationController.loadforget)
+user_route.post('/forget',blockUser,authenticationController.verifyforget)
+user_route.post('/resetPassword',blockUser,authenticationController.resetPassword)
+user_route.get("/logout",blockUser, auth.isLogin, authenticationController.userLogout);
+user_route.get("/register",blockUser, auth.isLogout, authenticationController.loadRegister);
 // user_route.post("/register", userController.insertUser);
-user_route.post("/register",blockUser,userController.loadOtp);
-user_route.get('/resendOtp', blockUser,userController.resendOtp)
-user_route.post('/verifyOtp',blockUser,userController.verifyOtp)
-
-
+user_route.post("/register",blockUser,authenticationController.loadOtp);
+user_route.get('/resendOtp', blockUser,authenticationController.resendOtp)
+user_route.post('/verifyOtp',blockUser,authenticationController.verifyOtp)
 // user_route.get("/productShow", auth.isLogout, userController.loadProducts);
-user_route.get("/productShow",blockUser, userController.loadProducts);
+user_route.get("/productShow",blockUser, productController.loadProducts);
 // user_route.get("/", userController.loadBannerDatas);
 
 
