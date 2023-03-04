@@ -19,7 +19,7 @@ const loadCategory = async (req, res) => {
     } catch (error) {
       console.log(error.message);
     }
-  };
+};
 
   
 //for loading categories in admin view file get
@@ -38,7 +38,7 @@ const addCategory = async (req, res) => {
     const categoryData = await Category.findOne({ name: req.body.category });
     const categoryAll = await Category.find();
     console.log(categoryData);
-    if (!categoryData) {
+    if (categoryData) {
       res.render("addCategory", {
         category: categoryAll,
         val: "",

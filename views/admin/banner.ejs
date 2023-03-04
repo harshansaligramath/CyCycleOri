@@ -42,6 +42,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link " href="/admin/coupon">
+        <i class="bi bi-grid"></i>
+        <span>Coupon</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link " href="index.html">
         <i class="bi bi-grid"></i>
         <span>Sales Report</span>
@@ -77,7 +83,7 @@
     <tbody>
       <% if(banners.length> 0){ %>
         <% for(let i=1;i <=banners.length; i++){ %>
-          <% if(banners[i-1].isAvailable==1){ %>
+          <% if(banners[i-1].isAvailable==1||banners[i-1].isAvailable==0){ %>
             <tr>
               <th>
                 <%= i %>
@@ -101,6 +107,20 @@
                   <a class="text-success" href="/admin/edit-banner?id=<%= banners[i-1]._id %>"><i
                       style="color: green;" class="m-r-5 mdi mdi-border-color"></i>Edit</a><br>
 
+                      <% if(banners[i-1].isAvailable){ %>
+                
+                        <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#block"
+                          onclick="del('<%- banners[i-1]._id %>')">Block</button>
+                        <a id='<%- banners[i-1]._id %>' href="/admin/blockBanners?id=<%= banners[i-1]._id %>"
+                          style="display: none">Block</a><br>
+                        <% } else{ %>
+                          <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#unBlock"
+                            onclick="del('<%- banners[i-1]._id %>')">UnBlock</button>
+                          <a id='<%- banners[i-1]._id %>' href="/admin/blockBanners?id=<%= banners[i-1]._id %>"
+                            style="display: none">UnBlock</a><br>
+                          <% } %>
+
+
                   <a onclick="return confirm('do you want to delete?')" class="text-danger"
                     href="/admin/delete-banner?id=<%= banners[i-1]._id %>"><i style="color: #ff0000;"
                       class="m-r-5 mdi mdi-border-color"></i>Delete</a><br>
@@ -110,7 +130,7 @@
               <% } %>
                 <% } } else{ %>
                   <tr>
-                    <td colspan="5">Products Not Found</td>
+                    <td colspan="5">Banners Not Found</td>
                   </tr>
                   <% } %>
 

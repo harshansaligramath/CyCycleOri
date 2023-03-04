@@ -147,7 +147,27 @@ const deleteBanner = async (req, res) => {
     }
   };
   
-  
+  // block product
+const blockBanner = async (req, res) => {
+  try {
+    const id = req.query.id;
+    const userData = await Banner.findOne({ _id: id });
+    if (userData.isAvailable ==1) {
+      const userData = await Banner.findByIdAndUpdate(
+        { _id: id },
+        { $set: { isAvailable:0 } }
+      );
+      console.log("blocked");
+    } else {
+      await Banner.findByIdAndUpdate({ _id: id }, { $set: { isAvailable: 1} });
+    }
+    console.log("unblocked");
+    res.redirect("/admin/banner");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   
 module.exports = {
 
@@ -157,6 +177,7 @@ module.exports = {
     addBanner,
     editBannerLoad,
     editBanner,
-    deleteBanner
+    deleteBanner,
+    blockBanner
   
 };

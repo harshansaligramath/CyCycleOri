@@ -18,6 +18,8 @@ const categoryController=require("../controllers/adminControllers/categoryContro
 // const dashBoardController=require("../controllers/adminControllers/dashBoardController")
 const productController=require("../controllers/adminControllers/productController")
 const usersController=require("../controllers/adminControllers/usersController")
+const couponController=require("../controllers/adminControllers/couponController")
+
 admin_route.use(express.static('public/admin'));
 
 admin_route.set('view engine', 'ejs');
@@ -32,6 +34,7 @@ admin_route.get('/logout', auth.isLogin, usersController.logout);
 admin_route.get('/dashboard', auth.isLogin, usersController.loadDashboard);
 admin_route.get('/users', auth.isLogin, usersController.loadUsers);
 admin_route.get('/block',usersController.blockUser)
+//category
 admin_route.get('/category',auth.isLogin, categoryController.loadCategory)
 admin_route.get('/addCategory',auth.isLogin, categoryController.loadAddCategories)
 admin_route.post('/addCategory',auth.isLogin, categoryController.addCategory)
@@ -59,9 +62,16 @@ admin_route.post('/addBanners',bannerController.upload1.array('image', 10), bann
 admin_route.get('/edit-banner', auth.isLogin, bannerController.editBannerLoad);
 admin_route.post('/edit-banner',bannerController.upload1.array('image', 10),bannerController.editBanner)
 //for deleting banner
+admin_route.get('/blockBanners',bannerController.blockBanner)
 admin_route.get('/delete-banner',bannerController.deleteBanner);
+//coupon 
 
 
+admin_route.get('/coupon',couponController.loadCoupon)
+admin_route.post('/addCoupon',couponController.addCoupon)
+admin_route.get('/edit-coupon',couponController.editCouponLoad)
+admin_route.post('/edit-Coupon',couponController.editCoupon)
+admin_route.get('/blockCoupon',couponController.blockCoupon)
 
 
 

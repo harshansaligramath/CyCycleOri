@@ -126,7 +126,7 @@ const loadforget = async (req, res) => {
       console.log(error.message);
     }
   };
-
+ 
   let user
 const loadOtp = async (req, res) => {
     try {

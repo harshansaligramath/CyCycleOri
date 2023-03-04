@@ -42,6 +42,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link " href="/admin/coupon">
+        <i class="bi bi-grid"></i>
+        <span>Coupon</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link " href="index.html">
         <i class="bi bi-grid"></i>
         <span>Sales Report</span>
@@ -111,12 +117,12 @@
                         <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#block"
                           onclick="del('<%- products[i-1]._id %>')">Block</button>
                         <a id='<%- products[i-1]._id %>' href="/admin/blockProduct?id=<%= products[i-1]._id %>"
-                          style="display: none">Block</a>
+                          style="display: none">Block</a><br>
                         <% } else{ %>
                           <button class=" blk btn-outline-danger" data-toggle="modal" data-target="#unBlock"
                             onclick="del('<%- products[i-1]._id %>')">UnBlock</button>
                           <a id='<%- products[i-1]._id %>' href="/admin/blockProduct?id=<%= products[i-1]._id %>"
-                            style="display: none">UnBlock</a>
+                            style="display: none">UnBlock</a><br>
                           <% } %>
 
 

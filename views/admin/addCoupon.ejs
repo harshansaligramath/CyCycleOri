@@ -27,9 +27,7 @@
         <span>Category</span>
       </a>
     </li>
-
-
-   
+    
     <li class="nav-item">
       <a class="nav-link " href="/admin/banners">
         <i class="bi bi-grid"></i>
@@ -54,36 +52,50 @@
         <span>Sales Report</span>
       </a>
     </li>
-       
+    
+    
     
   </ul>
 
 </aside>
 
-            <div style="padding-left: 30%;padding-right: 5%;" >
-            <form action="/admin/edit-category?id=<%-category._id%>" method="post">
+
+        <div class="layout-page" style="margin-left: 25%; ">
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+
+
+          </nav>
+          <div ><form action="/admin/addCoupon" method="post">
             <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
             <div class="card mb-4">
-              <h5 class="card-header">EDIT CATEGORY</h5>
+              <h5 class="card-header">Add Coupon</h5>
               <div class="card-body">
-                
-                
-                
+                              
                 
                 <div class="mb-3 row">
-                  <label for="html5-number-input" class="col-md-2 col-form-label">category</label>
+                  <label for="html5-number-input" class="col-md-2 col-form-label">Coupon</label>
                   <div class="col-md-10">
-                    <input class="form-control" required type="text" name="category" value="<%-category.name%>" id="html5-number-input" />
-                  </div>
+                    <input class="form-control" type="text" name="category" value="Enter your coupon name" id="html5-number-input" />
+                    <input type="number" class="form-control" name="discount"  required /> <br>
+                    
+                  
                 </div>
-               
+                </div>              
               </div>
             </div>
             </div>
             </div>   
             <div class="buy-now">
-              <button type="submit"  class="btn btn-success btn-buy-now">SAVE CATEGORY</button>
+              <button type="submit"  class="btn btn-success btn-buy-now">ADD COUPON</button>
             </div> 
             </form>      
           </div>
