@@ -2,17 +2,6 @@ const Product = require("../../models/product");
 const User=require("../../models/userModel")
 
  
-// const addToWishList = async (req, res) => {
-//     try {
-//       if (req.session.user) {
-//         session = req.session.user;
-//       } else session = false;
-//       res.render("wishList", { user: session,});
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   }; 
-
 
   const addToWishList = async(req,res)=>{
     const productId = req.query.id
@@ -25,7 +14,7 @@ const User=require("../../models/userModel")
         res.redirect('/wishList')
     }
 }
-
+ 
 const deleteFromWishlist = async(req,res)=>{
   const productId = req.query.id
   const userData =await User.findById({_id:req.session.user_id})

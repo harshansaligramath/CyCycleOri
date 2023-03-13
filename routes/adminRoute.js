@@ -22,7 +22,6 @@ const couponController=require("../controllers/adminControllers/couponController
 
 admin_route.use(express.static('public/admin'));
 
-admin_route.set('view engine', 'ejs');
 admin_route.set('views', './views/admin');
 admin_route.use(express.json());
 admin_route.use(express.urlencoded({ extended: true }));
@@ -42,17 +41,25 @@ admin_route.get('/blockCategory',categoryController.blockCategory)
 admin_route.get('/deleteCategory',auth.isLogin, categoryController.deleteCategory)
 admin_route.get('/editCategory',auth.isLogin, categoryController.editCategoryLoad)
 admin_route.post('/edit-category',auth.isLogin, categoryController.editCategory)
+
+
 //for loading products in admin view file
 admin_route.get('/products',auth.isLogin, productController.loadProducts)
 //for adding products
 admin_route.get('/addProducts',auth.isLogin, productController.loadAddProducts)
-admin_route.post('/addProducts',productController.upload.array('image', 10), productController.addProduct)
+admin_route.post('/addProducts',productController.upload.array('image',10), productController.addProduct)
+
+admin_route.post('/updateImage', productController.updateImage)
+admin_route.post('/uploadImage',productController.upload.array('image', 10), productController.uploadImage)
+
 //for editing products
 admin_route.get('/edit-product', auth.isLogin, productController.editUserLoad);
 admin_route.post('/edit-product',productController.upload.array('image', 10),productController.editProduct)
 //for deleting products
 admin_route.get('/blockProduct',productController.blockProduct)
 admin_route.get('/delete-product',productController.deleteProduct);
+ 
+ 
 //for loading banners in admin view file
 admin_route.get('/banners',auth.isLogin, bannerController.loadBanners)
 //for adding banner
@@ -65,14 +72,14 @@ admin_route.post('/edit-banner',bannerController.upload1.array('image', 10),bann
 admin_route.get('/blockBanners',bannerController.blockBanner)
 admin_route.get('/delete-banner',bannerController.deleteBanner);
 //coupon 
-
+ 
 
 admin_route.get('/coupon',couponController.loadCoupon)
 admin_route.post('/addCoupon',couponController.addCoupon)
 admin_route.get('/edit-coupon',couponController.editCouponLoad)
 admin_route.post('/edit-Coupon',couponController.editCoupon)
 admin_route.get('/blockCoupon',couponController.blockCoupon)
-
+ 
 
 
 

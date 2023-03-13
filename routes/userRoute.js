@@ -17,7 +17,7 @@ const auth = require("../middleware/auth");
 // const adminAuth = require('../middleware/adminAuth')
 user_route.use(express.static('public/user'));
 
-user_route.set("view engine", "ejs");
+// user_route.set("view engine", "ejs");
 user_route.set("views", "./views/users");
 
 const bodyParser = require("body-parser");
@@ -53,26 +53,38 @@ user_route.get("/singleProductPage",blockUser, productController.loadSingleProdu
 
 
 
-// user_route.get("/wishList",blockUser, wishListController.loadWishList);
 user_route.get("/addToWishList",blockUser, wishListController.addToWishList);
 user_route.get('/deleteFromWishList',wishListController.deleteFromWishlist)
 user_route.get('/wishList',wishListController.loadWishList)
 
+ 
+// user_route.get('/cart',cartController.loadCart)
+// user_route.get('/addToCart',cartController.addToCart)
+// user_route.get('/removeFromCart',cartController.removeFromCart)
 
 user_route.get('/cart',cartController.loadCart)
+user_route.post('/updateCart',cartController.updateCart)
 user_route.get('/addToCart',cartController.addToCart)
 user_route.get('/removeFromCart',cartController.removeFromCart)
-
-user_route.get("/", homeController.loadHome);
-
-
+ 
+// user_route.get("/", homeController.loadHome);
+  
+  
 
 // user_route.get('/singleCategory',categoryController.loadCategoryPage)
 user_route.get('/productShow', productController.loadProducts)
-user_route.post('/checkOut', checkOutController.loadcheckOut)
+
+user_route.get('/checkOut', checkOutController.loadCheckOut) 
+user_route.post('/applyCoupon',checkOutController.applyCoupon)
+user_route.post('/placeOrder', checkOutController.saveDetails) 
+user_route.get('/successCashOnDelivery', checkOutController.successCashOnDelivery) 
+
+
+
 
 user_route.get('/usersProfile',usersProfileController.loadUsersProfile)
 
 
  
 module.exports = user_route;
+ 

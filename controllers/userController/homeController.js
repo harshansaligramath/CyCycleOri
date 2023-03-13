@@ -11,10 +11,6 @@ const loadHome = async (req, res) => {
       if (!search) {
           search = ''
       }
-     
-      
-
-
       bannerData = await Banner.find();
       console.log(bannerData);
       if (req.session.user) {
@@ -22,7 +18,8 @@ const loadHome = async (req, res) => {
       } else session = false;
       res.render("home", { user: session,banner:bannerData,val: search,});
     } catch (error) {
-      console.log(error.message);
+      res.render("errorpage")
+      // console.log(error.message);
     }
   };
 module.exports = {

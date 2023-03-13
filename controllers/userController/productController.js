@@ -1,18 +1,20 @@
 const Product = require("../../models/product");
 const Category = require("../../models/category");
-
 const loadProducts = async (req, res) => {
   try {
       const categoryData = await Category.find()
-      let { search, sort, category, limit, page } = req.query
+      let { search, sort, category, limit, page, ajax } = req.query
       if (!search) {
           search = ''
       }
-      if(!page){
-          skip=0
-      }else{
-          skip=page*10
+      skip=0
+      if(!limit){
+          limit=15
       }
+      if(!page){
+          page=0
+      }
+      skip=page*limit
       console.log(category);
       let arr = []
       if (category) {
@@ -26,13 +28,30 @@ const loadProducts = async (req, res) => {
       console.log('sort ' + req.query.sort);
       console.log('category ' + arr);
       if (sort == 0) {
+          productData = await Product.find({ is_admin: 0, $and: [{ category: arr }, { $or: [{ name: { $regex: '' + search + ".*" } }, { category: { $regex: ".*" + search + ".*" } }] }] }).sort({$natural:-1})
+          pageCount = Math.floor(productData.length/limit)
+          if(productData.length%limit >0){
+              pageCount +=1
+          }
+          console.log(productData.length + ' results found '+pageCount);
           productData = await Product.find({ is_admin: 0, $and: [{ category: arr }, { $or: [{ name: { $regex: '' + search + ".*" } }, { category: { $regex: ".*" + search + ".*" } }] }] }).sort({$natural:-1}).skip(skip).limit(limit)
       } else {
+          productData = await Product.find({ is_admin: 0, $and: [{ category: arr }, { $or: [{ name: { $regex: '' + search + ".*" } }, { category: { $regex: ".*" + search + ".*" } }] }] }).sort({ price: sort })
+          pageCount = Math.floor(productData.length/limit)
+          if(productData.length%limit >0){
+              pageCount +=1
+          }
+          console.log(productData.length + ' results found '+pageCount);
           productData = await Product.find({ is_admin: 0, $and: [{ category: arr }, { $or: [{ name: { $regex: '' + search + ".*" } }, { category: { $regex: ".*" + search + ".*" } }] }] }).sort({ price: sort }).skip(skip).limit(limit)
       }
       console.log(productData.length + ' results found');
       if (req.session.user) { session = req.session.user } else session = false
-      res.render('products', { user: session, products: productData, category: categoryData, val: search, selected: category, order: sort, limit: limit })
+      if(pageCount==0){pageCount=1}
+      if(ajax){
+      res.json({products: productData,pageCount,page})
+      }else{
+      res.render('products', { user: session, products: productData, category: categoryData, val: search, selected: category, order: sort, limit: limit,pageCount,page, head: 2 })
+      }
   } catch (error) {
       console.log(error.message);
   }

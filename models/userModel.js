@@ -95,8 +95,25 @@ userSchema.methods.removefromWishlist =async function (productId){
         return this.save()
     }
     
-}
+} 
 
+userSchema.methods.updateCart = async function (id,qty){
+    const cart = this.cart
+    const product = await Product.findById(id)
+    const index = cart.item.findIndex(objInItems => {
+        return new String(objInItems.productId).trim() == new String(product._id).trim()
+    })
+    console.log(id);
+    if(qty >cart.item[index].qty ){
+        cart.item[index].qty +=1
+        cart.totalPrice += product.price
+    }else{
+        cart.item[index].qty -=1
+        cart.totalPrice -= product.price  
+    }console.log(cart.totalPrice);
+     this.save()
+     return cart.totalPrice
+}
 userSchema.methods.addToCart = function (product) {
     const cart = this.cart
     const isExisting = cart.item.findIndex(objInItems => {

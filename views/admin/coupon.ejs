@@ -114,8 +114,12 @@
                                       <tr>
                                         <th scope="col">SI NO</th>
                                         <th scope="col">Coupon Name</th>
-                                        <th scope="col">Discount</th>
+                                        <th scope="col">max-Value</th>
+                                        <th scope="col">Min-value</th>
                                         <th scope="col">Actions</th>
+                                        
+ 
+
                                         
                     <div class="buy-now">
                       <button id="addb"  style="margin-left: 45%;" class="btn btn-success btn-buy-now"data-toggle="modal" data-target="#add">ADD COUPON</button>
@@ -134,8 +138,12 @@
                                             <td>
                                               <%= coupon[i-1].name %>
                                             </td>
-                                            <td>
-                                                <%= coupon[i-1].discount %>
+                                            
+                                              <td>
+                                                ₹ <%= coupon[i-1].max %> 
+                                              </td>
+                                              <td>
+                                                ₹ <%= coupon[i-1].min %> 
                                               </td>
                                             <td>
 
@@ -189,7 +197,12 @@
                             <div class="modal-body">
                               <label class="form-label" for="form3Example3c">Add new coupon</label>
                               <input type="text" placeholder="coupon name" class="form-control" name="name"  required /> <br>
-                              <input type="number" placeholder="offer price" class="form-control" name="discount"  required /> <br>
+                              <!-- <input type="number" placeholder="offer price" class="form-control" name="discount"  required /> <br> -->
+
+                              <input type="number" placeholder="Max Discount" class="form-control" name="maxDiscount"  required /> <br>
+                              <input type="number" placeholder="Min Amount" class="form-control" name="minValue"  required /> <br>
+
+
                               <% if(typeof message !=='undefined' ) { %>
                                 <p style="color: rgb(255, 0, 0); font-weight: bold">
                                   <%= message %>

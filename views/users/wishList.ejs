@@ -53,10 +53,10 @@
                                 <!--====== Wishlist Product ======-->
                                 
                                 <!--====== End - Wishlist Product ======-->
-
-                                <% for(let key of products.item){ %>
-
-                                <!--====== Wishlist Product ======-->
+                               
+                                <% if(products){ %>
+                                    <% if(products.item.length>0){ %>
+                              <% for(let key of products.item){ %>
                                 <div class="w-r u-s-m-b-30">
                                     <div class="w-r__container">
                                         <div class="w-r__wrap-1">
@@ -67,26 +67,36 @@
 
                                                 <span class="w-r__name">
 
-                                                    <a href="product-detail.html"><%= key.productId.name %></a></span>
+                                                    <a href="/productDetail?id=<%-key.productId._id%>"><%= key.productId.name %></a></span>
 
                                                 <span class="w-r__category">
 
                                                     <a href="shop-side-version-2.html"><%= key.productId.category %></a></span>
 
-                                                <span class="w-r__price"><%= key.productId.price %>
+                                                <span class="w-r__price">$125.00
 
                                                     <span class="w-r__discount">$160.00</span></span></div>
                                         </div>
                                         <div class="w-r__wrap-2">
 
-                                            <a class="w-r__link btn--e-brand-b-2" href="/addToCart" data-modal="modal" data-modal-id="#add-to-cart">ADD TO CART</a>
+                                            <a class="w-r__link btn--e-brand-b-2" data-modal="modal" data-modal-id="#add-to-cart" href="/addToCart?id=<%=key.productId._id%>">ADD TO CART</a>
 
-                                            <!-- <a class="w-r__link btn--e-transparent-platinum-b-2" href="product-detail.html">VIEW</a> -->
+                                            <a class="w-r__link btn--e-transparent-platinum-b-2" href="/singleProductPage?id=<%-key.productId._id%>">VIEW</a>
 
                                             <a class="w-r__link btn--e-transparent-platinum-b-2" href="/deleteFromWishList?id=<%= key.productId._id %>">REMOVE</a></div>
                                     </div>
                                 </div>
-
+                                <%} }else{ %>
+                                    <div class="col-lg-12">
+                                    <div class="text-dark justify-content-center">
+                                    </div>
+                                    </div><br><br>
+                                <%} }else{ %>
+                                    <div class="col-lg-12">
+                                    <div class="text-dark justify-content-center">
+                                        <h2>Looks Like You're not signned in</h2>
+                                        <a href="/login"><i class="fas fa-lock u-s-m-r-6"></i><span>Signin Now</span></a>
+                                    </div></div><br><br>    
                                 <%}%>
 
                                 <!--====== End - Wishlist Product ======-->

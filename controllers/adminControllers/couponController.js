@@ -14,6 +14,8 @@ const addCoupon = async (req,res)=>{
     const coupon = new Coupons({
       name : req.body.name,
       discount: req.body.discount,
+      max:req.body.maxDiscount,
+      min:req.body.minValue
     })
     await coupon.save()
     res.redirect('coupon')
@@ -45,12 +47,16 @@ const editCoupon = async (req, res) => {
     id=req.query.id;
     const name= req.body.name;
     const discount=req.body.discount;
+    const max=req.body.maxDiscount;
+    const min=req.body.minValue;
     const catagoryData = await Coupons.updateOne(
       
       {_id:id},
       {$set:{
         name:name,
-        discount:discount
+        // discount:discount,
+        max:max,
+        min:min
       },}
       );
     // if(catagoryData){await Category.save();}
