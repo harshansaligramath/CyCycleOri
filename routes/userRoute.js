@@ -68,21 +68,34 @@ user_route.get('/addToCart',cartController.addToCart)
 user_route.get('/removeFromCart',cartController.removeFromCart)
  
 // user_route.get("/", homeController.loadHome);
-  
-  
+   
+   
 
 // user_route.get('/singleCategory',categoryController.loadCategoryPage)
 user_route.get('/productShow', productController.loadProducts)
 
-user_route.get('/checkOut', checkOutController.loadCheckOut) 
-user_route.post('/applyCoupon',checkOutController.applyCoupon)
-user_route.post('/placeOrder', checkOutController.saveDetails) 
-user_route.get('/successCashOnDelivery', checkOutController.successCashOnDelivery) 
+// user_route.get('/checkOut', checkOutController.loadCheckOut) 
+// user_route.post('/applyCoupon',checkOutController.applyCoupon)
+// user_route.post('/placeOrder', checkOutController.saveDetails) 
+// user_route.get('/successCashOnDelivery', checkOutController.successCashOnDelivery) 
 
+ 
+//for testing purpose 
+user_route.get('/checkout',checkOutController.loadCheckout) 
+user_route.post('/applyCoupon',checkOutController.applyCoupon)
+user_route.post('/placeOrder',checkOutController.placeOrder) 
+user_route.get('/orderSuccess',checkOutController.loadSuccess)
 
 
 
 user_route.get('/usersProfile',usersProfileController.loadUsersProfile)
+// user_route.get('/usersProfileOrders',usersProfileController.loadUsersOrders)
+
+user_route.get('/orders', usersProfileController.loadOrders)
+user_route.get('/orderDetails', usersProfileController.loadOrderDetails)
+user_route.get('/cancelOrder', usersProfileController.canselOrder)
+
+
 
 
  

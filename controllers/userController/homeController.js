@@ -10,7 +10,7 @@ const loadHome = async (req, res) => {
       let { search,  } = req.query
       if (!search) {
           search = ''
-      }
+      }  
       bannerData = await Banner.find();
       console.log(bannerData);
       if (req.session.user) {
@@ -24,5 +24,5 @@ const loadHome = async (req, res) => {
   };
 module.exports = {
     loadHome
-};
+}; 
 

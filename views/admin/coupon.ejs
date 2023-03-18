@@ -1,64 +1,8 @@
 <%- include ('../layouts/adminHeader.ejs') %>
  
         <!-- ======= Sidebar ======= -->
-         <aside id="sidebar" class="sidebar">
-      
-          <ul class="sidebar-nav" id="sidebar-nav">
-      
-            <li class="nav-item">
-              <a class="nav-link " href="/admin/dashboard">
-                <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
-              </a>
-            </li><!-- End Dashboard Nav -->
-            <li class="nav-item">
-              <a class="nav-link " href="/admin/products">
-                <i class="bi bi-grid"></i>
-                <span>Product</span>
-              </a>
-            </li><li class="nav-item">
-              <a class="nav-link " href="/admin/users">
-                <i class="bi bi-grid"></i>
-                <span>User</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/admin/category">
-                <i class="bi bi-grid"></i>
-                <span>Category </span>
-              </a>
-            </li>
-      
-            <li class="nav-item">
-              <a class="nav-link " href="/admin/banners">
-                <i class="bi bi-grid"></i>
-                <span>banner</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="">
-                <i class="bi bi-grid"></i>
-                <span>Order and Payment</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/admin/coupon">
-                <i class="bi bi-grid"></i>
-                <span>Coupon</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/admin/testC">
-                <i class="bi bi-grid"></i>
-                <span>Sales Report</span>
-              </a>
-            </li>
-            
-            
-            
-          </ul>
-      
-        </aside> 
+<%- include ('../layouts/adminProfileLeft.ejs') %>
+        
         <!-- End Sidebar-->
        
        
@@ -114,6 +58,7 @@
                                       <tr>
                                         <th scope="col">SI NO</th>
                                         <th scope="col">Coupon Name</th>
+                                        <th scope="col">percentage</th>
                                         <th scope="col">max-Value</th>
                                         <th scope="col">Min-value</th>
                                         <th scope="col">Actions</th>
@@ -138,7 +83,9 @@
                                             <td>
                                               <%= coupon[i-1].name %>
                                             </td>
-                                            
+                                            <td>
+                                              <%= coupon[i-1].discount %>%
+                                            </td>
                                               <td>
                                                 ₹ <%= coupon[i-1].max %> 
                                               </td>

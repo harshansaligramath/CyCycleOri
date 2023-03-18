@@ -1,239 +1,416 @@
 <%- include('../layouts/header.ejs') %>
-    <!--====== Main App ======-->
-    <div id="app">
+
+<div id="app">
+
+    <!--====== Main Header ======-->
+    
+    <!--====== End - Main Header ======-->
 
 
-        <!--====== App Content ======-->
-        <div class="app-content">
+    <!--====== App Content ======-->
+    <div class="app-content">
 
-            <!--====== Section 1 ======-->
-            <div class="u-s-p-y-60">
+        <!--====== Section 1 ======-->
+        <div class="u-s-p-y-60">
 
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                </div>
+            <!--====== Section Content ======-->
+            <div class="section__content">
             </div>
-            <div class="u-s-p-b-60">
+        </div>
+        <div class="u-s-p-b-60">
 
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-60">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary">SHOPPING CART</h1>
-                                </div>
+            <!--====== Section Intro ======-->
+            <div class="section__intro u-s-m-b-60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section__text-wrap">
+                                <h1 class="section__heading u-c-secondary">SHOPPING CART</h1>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--====== End - Section Intro ======-->
+            </div>
+            <!--====== End - Section Intro ======-->
 
 
-                <!--====== Section Content ======-->
-                <% if(user) { %>
-                    <% if(products.item.length>0) { %>
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                                <div class="table-responsive">
-                                    <table class="table-p">
-                                        <tbody >
-                                            <% for(let key of products.item){ %>
-                                            <tr>
-                                                <td>
-                                                    <div class="table-p__box">
-                                                        <div class="table-p__img-wrap">
+            <!--====== Section Content ======-->
+            <% if(user) { %>
+                <% if(products.item.length>0) { %>
+            <div class="section__content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                            <div class="table-responsive">
+                                <table class="table-p">
+                                    <tbody >
+                                        <% for(let key of products.item){ %>
+                                        <tr>
+                                            <td>
+                                                <div class="table-p__box">
+                                                    <div class="table-p__img-wrap">
 
-                                                            <img class="u-img-fluid" src="/admin/uploads/<%=key.productId.image[0] %>" alt=""></div>
-                                                        <div class="table-p__info">
+                                                        <img class="u-img-fluid" src="/admin/uploads/<%=key.productId.image[0] %>" alt=""></div>
+                                                    <div class="table-p__info">
 
-                                                            <span class="table-p__name">
+                                                        <span class="table-p__name">
 
-                                                                <a href="/productDetail?id=<%-key.productId._id%>"><%= key.productId.name %></a></span>
+                                                            <a href="/productDetail?id=<%-key.productId._id%>"><%= key.productId.name %></a></span>
 
-                                                            <span class="table-p__category">
+                                                        <span class="table-p__category">
 
-                                                                <a href="shop-side-version-2.html"><%= key.productId.category %></a></span>
-                                                            <ul class="table-p__variant-list">
-                                                                <li>
+                                                            <a href="shop-side-version-2.html"><%= key.productId.category %></a></span>
+                                                        <ul class="table-p__variant-list">
+                                                            <li>
 
-                                                                    <span>Size: 22</span></li>
-                                                                <li>
+                                                                <span>Size: 22</span></li>
+                                                            <li>
 
-                                                                    <span>Color: Red</span></li>
-                                                            </ul>
-                                                        </div>
+                                                                <span>Color: Red</span></li>
+                                                        </ul>
                                                     </div>
-                                                </td>
-                                                <td>
+                                                </div>
+                                            </td>
+                                            <td>
 
-                                                    <span class="table-p__price">$<%= key.productId.price %>.00</span></td>
-                                                <td>
-                                                    <div class="table-p__input-counter-wrap">
+                                                <span class="table-p__price">$<%= key.productId.price %>.00</span></td>
+                                            <td>
+                                                <div class="table-p__input-counter-wrap">
 
-                                                        <!--====== Input Counter ======-->
-                                        
-                                                            <div class="input-counter">
+                                                    <!--====== Input Counter ======-->
+                                    
+                                                    <div class="input-counter">
 
-                                                                <span class="input-counter__minus fas fa-minus"></span>
-    
-                                                                <input class="input-counter__text input-counter--text-primary-style" value="<%= key.qty %>" onchange="update(this.value ,'<%= key.productId._id %>')" type="text" data-min="1" data-max="1000">
-    
-                                                                <span class="input-counter__plus fas fa-plus"></span></div>
-                                                        <!--====== End - Input Counter ======-->
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__del-wrap">
+                                                        <span class="input-counter__minus fas fa-minus"></span>
 
-                                                        <a class="far fa-trash-alt table-p__delete-link" href="/removeFromCart?id=<%= key.productId._id %>">remove</a></div>
-                                                </td>
-                                            </tr>
-                                            <%}%>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                        <input class="input-counter__text input-counter--text-primary-style" value="<%= key.qty %>" onchange="update(this.value ,'<%= key.productId._id %>')" type="text" data-min="1" data-max="<%= key.productId.stock %>">
+
+                                                        <span class="input-counter__plus fas fa-plus"></span></div>
+                                                    <!--====== End - Input Counter ======-->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-p__del-wrap">
+
+                                                    <a class="far fa-trash-alt table-p__delete-link" href="/removeFromCart?id=<%= key.productId._id %>">remove</a></div>
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--====== End - Section Content ======-->
+        </div>
+        <!--====== End - Section 2 ======-->
+
+
+        <!--====== Section 3 ======-->
+        <div class="u-s-p-b-60">
+
+            <!--====== Section Content ======-->
+            <div class="section__content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                            <form class="f-cart"  method="get">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                       
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                        
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                        <div class="f-cart__pad-box">
+                                            <div class="u-s-m-b-30">
+                                                <table class="f-cart__table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>SHIPPING</td>
+                                                            <td>$4.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>TAX</td>
+                                                            <td>$0.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>SUBTOTAL</td>
+                                                            <td>$0.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>GRAND TOTAL</td><td>₹ <span id='gTotal'> <%= products.totalPrice %></span>.00</td>                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                <a href="/checkOut">PROCEED TO CHECKOUT</a>
+                                                <!-- <button class="btn btn--e-brand-b-2 btn-warning" type="submit"> PROCEED TO CHECKOUT</button></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="route-box">
+                            <div class="route-box__g1">
+
+                                <a class="route-box__link" href="/productShow"><i class="fas fa-long-arrow-alt-left"></i>
+
+                                    <span>CONTINUE SHOPPING</span></a></div>
                             
                         </div>
                     </div>
                 </div>
-                <!--====== End - Section Content ======-->
+                
             </div>
-            <!--====== End - Section 2 ======-->
+            <!--====== End - Section Content ======-->
+        </div>
+        <% }else{ %>
+            <div class="col-lg-12">
+                           </div><br><br>
+            <div class="col-lg-12">
+                <div class="route-box">
+                    <div class="route-box__g1">
 
+                        <a class="route-box__link" href="/products"><i class="fas fa-long-arrow-alt-left"></i>
 
-            <!--====== Section 3 ======-->
-            <div class="u-s-p-b-60">
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                                <form class="f-cart"  method="get">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                           
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                            
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                            <div class="f-cart__pad-box">
-                                                <div class="u-s-m-b-30">
-                                                    <table class="f-cart__table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>SHIPPING</td>
-                                                                <td>$4.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>TAX</td>
-                                                                <td>$0.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>SUBTOTAL</td>
-                                                                <td>$0.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>GRAND TOTAL</td><td>₹ <span id='gTotal'> <%= products.totalPrice %></span>.00</td>                                            </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div>
-                                                    <a href="/checkOut">PROCEED TO CHECKOUT</a>
-                                                    <!-- <button class="btn btn--e-brand-b-2 btn-warning" type="submit"> PROCEED TO CHECKOUT</button></div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="route-box">
-                                <div class="route-box__g1">
-
-                                    <a class="route-box__link" href="/productShow"><i class="fas fa-long-arrow-alt-left"></i>
-
-                                        <span>CONTINUE SHOPPING</span></a></div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                <!--====== End - Section Content ======-->
+                            <span>CONTINUE SHOPPING</span></a></div>
+            </div> 
             </div>
-            <% }else{ %>
-                <div class="col-lg-12">
-                               </div><br><br>
-                <div class="col-lg-12">
-                    <div class="route-box">
-                        <div class="route-box__g1">
-
-                            <a class="route-box__link" href="/products"><i class="fas fa-long-arrow-alt-left"></i>
-
-                                <span>CONTINUE SHOPPING</span></a></div>
-                </div> 
-                </div>
-            <%} }else{ %>
-                <div class="col-lg-12">
-                 
-                </div> 
-            <%}%>
-            
-        </div>
+        <%} }else{ %>
+            <div class="col-lg-12">
+             
+            </div> 
+        <%}%>
+        
     </div>
-        </div>
-        <!--====== End - App Content ======-->
+    <!--====== End - App Content ======-->
 
-    </div>
 
-    <!--====== Vendor Js ======-->
-    <script src="js/vendor.js"></script>
-
-    <!--====== jQuery Shopnav plugin ======-->
-    <script src="js/jquery.shopnav.js"></script>
-
-    <!--====== App ======-->
-    <script src="js/app.js"></script>
-
-    <!--====== Noscript ======-->
-    <noscript>
-        <div class="app-setting">
+    <!--====== Main Footer ======-->
+    <footer>
+        <div class="outer-footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="app-setting__wrap">
-                            <h1 class="app-setting__h1">JavaScript is disabled in your browser.</h1>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="outer-footer__content u-s-m-b-40">
 
-                            <span class="app-setting__text">Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser.</span>
+                            <span class="outer-footer__content-title">Contact Us</span>
+                            <div class="outer-footer__text-wrap"><i class="fas fa-home"></i>
+
+                                <span>4247 Ashford Drive Virginia VA-20006 USA</span></div>
+                            <div class="outer-footer__text-wrap"><i class="fas fa-phone-volume"></i>
+
+                                <span>(+0) 900 901 904</span></div>
+                            <div class="outer-footer__text-wrap"><i class="far fa-envelope"></i>
+
+                                <span>contact@domain.com</span></div>
+                            <div class="outer-footer__social">
+                                <ul>
+                                    <li>
+
+                                        <a class="s-fb--color-hover" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li>
+
+                                        <a class="s-tw--color-hover" href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li>
+
+                                        <a class="s-youtube--color-hover" href="#"><i class="fab fa-youtube"></i></a></li>
+                                    <li>
+
+                                        <a class="s-insta--color-hover" href="#"><i class="fab fa-instagram"></i></a></li>
+                                    <li>
+
+                                        <a class="s-gplus--color-hover" href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="outer-footer__content u-s-m-b-40">
+
+                                    <span class="outer-footer__content-title">Information</span>
+                                    <div class="outer-footer__list-wrap">
+                                        <ul>
+                                            <li>
+
+                                                <a href="cart.html">Cart</a></li>
+                                            <li>
+
+                                                <a href="dashboard.html">Account</a></li>
+                                            <li>
+
+                                                <a href="shop-side-version-2.html">Manufacturer</a></li>
+                                            <li>
+
+                                                <a href="dash-payment-option.html">Finance</a></li>
+                                            <li>
+
+                                                <a href="shop-side-version-2.html">Shop</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="outer-footer__content u-s-m-b-40">
+                                    <div class="outer-footer__list-wrap">
+
+                                        <span class="outer-footer__content-title">Our Company</span>
+                                        <ul>
+                                            <li>
+
+                                                <a href="about.html">About us</a></li>
+                                            <li>
+
+                                                <a href="contact.html">Contact Us</a></li>
+                                            <li>
+
+                                                <a href="index.html">Sitemap</a></li>
+                                            <li>
+
+                                                <a href="dash-my-order.html">Delivery</a></li>
+                                            <li>
+
+                                                <a href="shop-side-version-2.html">Store</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="outer-footer__content">
+
+                            <span class="outer-footer__content-title">Join our Newsletter</span>
+                            <form class="newsletter">
+                                <div class="u-s-m-b-15">
+                                    <div class="radio-box newsletter__radio">
+
+                                        <input type="radio" id="male" name="gender">
+                                        <div class="radio-box__state radio-box__state--primary">
+
+                                            <label class="radio-box__label" for="male">Male</label></div>
+                                    </div>
+                                    <div class="radio-box newsletter__radio">
+
+                                        <input type="radio" id="female" name="gender">
+                                        <div class="radio-box__state radio-box__state--primary">
+
+                                            <label class="radio-box__label" for="female">Female</label></div>
+                                    </div>
+                                </div>
+                                <div class="newsletter__group">
+
+                                    <label for="newsletter"></label>
+
+                                    <input class="input-text input-text--only-white" type="text" id="newsletter" placeholder="Enter your Email">
+
+                                    <button class="btn btn--e-brand newsletter__btn" type="submit">SUBSCRIBE</button></div>
+
+                                <span class="newsletter__text">Subscribe to the mailing list to receive updates on promotions, new arrivals, discount and coupons.</span>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </noscript>
+        <div class="lower-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="lower-footer__content">
+                            <div class="lower-footer__copyright">
 
-    <script>
-        function update(qty , id) {
-            console.log(qty + id);
-        $.ajax({
-          url: '/updateCart',
-          type: 'POST',
-          data: { quantity:qty , _id:id },
-          success: function(data) {
-            console.log(data);
-            document.getElementById('gTotal').innerHTML=data.total
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-          }
-        });
+                                <span>Copyright © 2018</span>
+
+                                <a href="index.html">Reshop</a>
+
+                                <span>All Right Reserved</span></div>
+                            <div class="lower-footer__payment">
+                                <ul>
+                                    <li><i class="fab fa-cc-stripe"></i></li>
+                                    <li><i class="fab fa-cc-paypal"></i></li>
+                                    <li><i class="fab fa-cc-mastercard"></i></li>
+                                    <li><i class="fab fa-cc-visa"></i></li>
+                                    <li><i class="fab fa-cc-discover"></i></li>
+                                    <li><i class="fab fa-cc-amex"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!--====== End - Main App ======-->
+
+
+<!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
+<script>
+    window.ga = function() {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview')
+</script>
+<script>
+    function update(qty , id) {
+        console.log("enjoy");
+
+        console.log(qty);
+        console.log(id);
+    $.ajax({
+      url: '/updateCart',
+      type: 'POST',
+      data: { quantity:qty , _id:id },
+      
+      success: function(data) {
+          console.log("enjoy3333333333");
+        console.log(data);
+        document.getElementById('gTotal').innerHTML=data.total
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
       }
-    </script>
-    <%- include ('../layouts/footer.ejs') %>
+    });
+  }
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+<!--====== Vendor Js ======-->
+<script src="js/vendor.js"></script>
+
+<!--====== jQuery Shopnav plugin ======-->
+<script src="js/jquery.shopnav.js"></script>
+
+<!--====== App ======-->
+<script src="js/app.js"></script>
+
+<!--====== Noscript ======-->
+<noscript>
+    <div class="app-setting">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="app-setting__wrap">
+                        <h1 class="app-setting__h1">JavaScript is disabled in your browser.</h1>
+
+                        <span class="app-setting__text">Please enable JavaScript in your browser or upgrade to a JavaScript-capable browser.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</noscript>

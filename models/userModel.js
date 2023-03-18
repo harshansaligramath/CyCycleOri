@@ -65,6 +65,10 @@ const userSchema = mongoose.Schema({
                 type:Number
             },
         }]
+    },
+    wallet:{
+        type:Number,
+        default:0
     }
 
 
@@ -96,7 +100,6 @@ userSchema.methods.removefromWishlist =async function (productId){
     }
     
 } 
-
 userSchema.methods.updateCart = async function (id,qty){
     const cart = this.cart
     const product = await Product.findById(id)
@@ -107,10 +110,13 @@ userSchema.methods.updateCart = async function (id,qty){
     if(qty >cart.item[index].qty ){
         cart.item[index].qty +=1
         cart.totalPrice += product.price
-    }else{
+    }
+    else if(qty < cart.item[index].qty){
         cart.item[index].qty -=1
-        cart.totalPrice -= product.price  
-    }console.log(cart.totalPrice);
+        cart.totalPrice -= product.price     
+    }else{
+    }
+    // console.log(cart.totalPrice);
      this.save()
      return cart.totalPrice
 }

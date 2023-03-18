@@ -1,0 +1,81 @@
+
+
+
+<%- include ('../layouts/usersProfileHeader.ejs') %>
+
+          
+ 
+ <%-include ('../layouts/usersProfileLeftSide.ejs')%>
+
+
+              <!-- Layout container -->
+              <div class="layout-page">
+                <!-- Navbar -->
+      
+
+                <% if(typeof message !=='undefined' ) { %>
+                  <script>setTimeout(() => document.getElementById("addb").click(), 100)</script>
+                  <%} %>
+            
+                    <div class="page-wrapper">
+                      <div class="content-wrapper">
+                        <div class="container-xxl flex-grow-1 container-p-y">
+                          <div class="card" style="margin-left: 15%;">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4  style="margin-left: 25%; " class="card-title">orders</h4>
+                                <div class="table-responsive">
+                                 
+
+                                  <table class="table">
+                                    <thead class="thead-light">
+                                      <tr>
+                                        <th scope="col">Order ID </th>
+                                        <th scope="col">payment method </th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">View</th>
+                                        <th scope="col">Actions</th>
+
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <% for(let key of orders){%>
+                      
+                                        
+                                          <tr>
+                                            <td>
+                                              #<%-key._id%>
+                                            </td>
+                                            <td>
+                                              <%-key.payment%>
+                                            </td>
+                                            <td>
+                                              <%-key.status%>
+                                            </td>
+                                            <td>
+                                              <a href="/orderDetails?id=<%-key._id%>"><div class="btn btn-success text-uppercase">order details</div></a> 
+
+                                            </td>
+                                            <td>
+                                            
+                                                <a id='<%- key._id %>' href="/cancelOrder?id=<%= key._id %>"
+                                                >canselOrder</a>
+                                                  </td>   
+                                                                               
+                                          </tr>
+                                          <%}%>
+                                         
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+       
+   

@@ -7,6 +7,8 @@ const loadCart = async (req, res) => {
         if(req.session.user_id){
             const userData =await User.findById({ _id:req.session.user_id })
             const cartData = await userData.populate('cart.item.productId')
+            // console.log("ooooooooooooooooooooooooooooo");
+            console.log(cartData);
         res.render('cart', { user: session, products:cartData.cart })}
         else{
           res.render('login',)
@@ -22,10 +24,10 @@ const updateCart = async(req,res)=>{
         let { quantity , _id } = req.body
             const userData =await User.findById({_id:req.session.user_id})
             const total =await userData.updateCart(_id , quantity)
-            // console.log("hiiiiii");
+            console.log(quantity,_id);
             // console.log(total);
           res.json({total})
-    }catch(error){
+    }catch(error){ 
         console.log(error)
     }
 }

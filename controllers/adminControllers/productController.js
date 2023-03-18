@@ -64,20 +64,20 @@ const addProduct = async (req, res) => {
         res.render("product", {
           message: "registration successfull.",
           products: productData,
-          active: 4,
+        
         });
       } else {
         res.render("addProducts", {
           message: "registration failed",
           category: categoryData,
-          active: 4,
+        
         });
       }
     } else {
       res.render("addProducts", {
         message: "registration failed only jpg ,jpeg & png file supported !",
         category: categoryData,
-        active: 4,
+      
       });
     }
   } catch (error) {

@@ -19,6 +19,7 @@ const categoryController=require("../controllers/adminControllers/categoryContro
 const productController=require("../controllers/adminControllers/productController")
 const usersController=require("../controllers/adminControllers/usersController")
 const couponController=require("../controllers/adminControllers/couponController")
+const orderController=require("../controllers/adminControllers/orderController")
 
 admin_route.use(express.static('public/admin'));
 
@@ -31,6 +32,7 @@ admin_route.get('/', auth.isLogout, usersController.loadLogin);
 admin_route.post('/', usersController.verifyLogin);
 admin_route.get('/logout', auth.isLogin, usersController.logout);
 admin_route.get('/dashboard', auth.isLogin, usersController.loadDashboard);
+
 admin_route.get('/users', auth.isLogin, usersController.loadUsers);
 admin_route.get('/block',usersController.blockUser)
 //category
@@ -42,7 +44,7 @@ admin_route.get('/deleteCategory',auth.isLogin, categoryController.deleteCategor
 admin_route.get('/editCategory',auth.isLogin, categoryController.editCategoryLoad)
 admin_route.post('/edit-category',auth.isLogin, categoryController.editCategory)
 
-
+ 
 //for loading products in admin view file
 admin_route.get('/products',auth.isLogin, productController.loadProducts)
 //for adding products
@@ -79,7 +81,12 @@ admin_route.post('/addCoupon',couponController.addCoupon)
 admin_route.get('/edit-coupon',couponController.editCouponLoad)
 admin_route.post('/edit-Coupon',couponController.editCoupon)
 admin_route.get('/blockCoupon',couponController.blockCoupon)
- 
+
+//order management
+admin_route.get('/orders',orderController.loadOrders)
+admin_route.get('/orderDetails',orderController.loadOrderDetails)
+admin_route.post('/editOrder',orderController.changeStatus)
+  
 
 
 

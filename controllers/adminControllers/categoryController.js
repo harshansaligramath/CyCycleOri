@@ -9,7 +9,7 @@ const loadCategory = async (req, res) => {
         // console.log("search:"+search);
       }
       const userData = await Category.find({
-       
+        
         $or: [
           { name: { $regex: ".*" + search + ".*" } },
          
@@ -20,7 +20,7 @@ const loadCategory = async (req, res) => {
       console.log(error.message);
     }
 };
-
+ 
   
 //for loading categories in admin view file get
 const loadAddCategories = async (req, res) => {

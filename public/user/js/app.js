@@ -347,13 +347,13 @@
             // Attach Click event to plus button
             $collectionInputCounter.find('.input-counter__plus').on('click',function () {
                 var $input = $(this).parent().find('input');
-                var count = parseInt($input.val()) + 1; // Number + Number
+                var count = parseInt($input.val()) +1; // Number + Number
                 $input.val(count).change();
             });
             // Attach Click event to minus button
             $collectionInputCounter.find('.input-counter__minus').on('click',function () {
                 var $input = $(this).parent().find('input');
-                var count = parseInt($input.val()) - 1; // Number - Number
+                var count = parseInt($input.val())-1 ; // Number - Number
                 $input.val(count).change();
             });
             // Fires when the value of the element is changed

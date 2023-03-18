@@ -22,7 +22,7 @@ app.use("/", userRoute);
 
 const adminRoute = require("./routes/adminRoute");
 app.use("/admin", adminRoute);
-app.all('*', (req, res) => {
+app.all('*', (req, res) => { 
   res.render("errorpage")
 })
 
