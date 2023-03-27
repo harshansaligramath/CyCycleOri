@@ -17,10 +17,10 @@
                   <script>setTimeout(() => document.getElementById("addb").click(), 100)</script>
                   <%} %>
             
-                    <div class="page-wrapper">
-                      <div class="content-wrapper">
-                        <div class="container-xxl flex-grow-1 container-p-y">
-                          <div class="card" style="margin-left: 15%;">
+                    <!-- <div class="page-wrapper"> -->
+                      <!-- <div class="content-wrapper"> -->
+                        <!-- <div class="container-xxl flex-grow-1 container-p-y"> -->
+                          <div class="card" >
                             <div class="card">
                               <div class="card-body">
                                 <h4  style="margin-left: 25%; " class="card-title">orders</h4>
@@ -39,7 +39,7 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <% for(let key of orders){%>
+                                      <% for(let key of orderData){%>
                       
                                         
                                           <tr>
@@ -58,8 +58,13 @@
                                             </td>
                                             <td>
                                             
-                                                <a id='<%- key._id %>' href="/cancelOrder?id=<%= key._id %>"
-                                                >canselOrder</a>
+
+                                              <a id='<%- key._id %>' onclick="return confirm('do you want to cancel Order?')" class="text-danger"
+                                              href="/cancelOrder?id=<%= key._id %>"><i style="color: #ff0000;"
+                                                class="m-r-5 mdi mdi-border-color"></i>cancelOrder</a>
+                                              
+                                                <!-- <a id='<%- key._id %>' href="/cancelOrder?id=<%= key._id %>"
+                                                >canselOrder</a> -->
                                                   </td>   
                                                                                
                                           </tr>

@@ -51,15 +51,18 @@ const addBanner = async (req, res) => {
       });
       console.log(product);
       const productData = await product.save();
+      const bannerData = await Banner.find();
       if (productData) {
-        res.render("dashboard", {
+        res.render("banner", {
           message: "registration successfull.",
           products: productData,
+          banners: bannerData 
         });
       } else {
         res.render("banner", {
           message: "registration failed",
           products: productData,
+          banners: bannerData 
         });
       }
     } catch (error) {
@@ -123,13 +126,13 @@ const editBanner = async (req, res) => {
         res.render("banner", {
           message: "registration successfull.",
           banners: productData,
-          active: 4,
+          
         });
       } else {
         res.render("banner", {
           message: "registration failed",
           banners: productData,
-          active: 4,
+        
         });
       }
     } catch (error) {
@@ -167,7 +170,7 @@ const blockBanner = async (req, res) => {
     console.log(error);
   }
 };
-
+ 
   
 module.exports = {
 

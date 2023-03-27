@@ -1,0 +1,171 @@
+<%- include ('../layouts/adminHeader.ejs') %>
+<%- include ('../layouts/adminProfileLeft.ejs') %>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <section style="background-color: #fefdfd;margin-left: 35%;">
+        <div class="container py-5">
+          
+          <form action="/admin/salesReport" method="post">
+      
+          <div class="row">
+            
+            <div class="col-lg-8">
+              <div class="card mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="row">
+                    
+                      <label>
+                        Enter Date From:
+                        <input type="date" name="startingDate" />
+                      </label>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    
+                    <label >
+                      Enter Date To    :
+                      <input type="date" name="expiryDate" />
+                    </label>
+                  </div>
+                  <hr>
+                  
+                                 </div>
+              </div>
+              <!-- <a href="/" style="height: 30px;" class="btn btn-primary  btn-xxs rounded">download in pdf</a>
+                  <a href="/" style="height: 30px;" class="btn btn-danger  btn-xxs rounded">download in excel</a> -->
+                  <button type="submit" id="downloadPdfBtn" class="btn btn-success btn-buy-now" style="width: 200px;margin-right: 10px;">DOWNLOAD REPORT </button>
+            </div>
+
+          </div>
+          <div class="page-wrapper" style="margin-top: 15px;">
+            <div class="content-wrapper">
+              <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="card" >
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Orders</h4>
+                      <div class="table-responsive">
+                        <table id='ordersTable' class="table table-hover  " style="table-layout: fixed;font-size: smaller;">
+                          <thead>
+                            <tr>
+                              <th scope="col">SI NO</th>
+                              <th scope="col">order Id</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Payment</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Status</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% if( orders.length> 0){ %>
+                              <% for(let i=0;i < orders.length; i++){ %>
+                                <tr>
+                                  <td scope="row">
+                                    <%= i + 1 %>
+                                  </td>
+                                  <td style="font-size: x-small;">
+                                    #<%= orders[i]._id %>
+                                  </td>
+                                  <td>
+                                      <%= orders[i].userId.name %>
+                                  </td>
+                                  <td>
+                                    <%= orders[i].payment %>
+                                </td>
+                                <td>
+                                  ₹ <%= orders[i].amount %>.00
+                              </td>
+                                  <td>
+                                    <span class=" bg-label-<% if(orders[i].status =='Placed'){%>primary
+                                      <%}else if(orders[i].status =='Accepted'){%>info
+                                      <%}else if(orders[i].status =='Packed'){%>info
+                                      <%}else if(orders[i].status =='Shipped'){%>info
+                                      <%}else if(orders[i].status =='Delivered'){%>success
+                                      <%}else if(orders[i].status =='Cancelled'){%>danger<%}%>    
+                                         me-1"><%=orders[i].status %></span>
+                                  </td>
+                                  <td>
+                                    <a href="/admin/orderDetails?id=<%= orders[i]._id %>"
+                                    class="btn btn-success a-btn-slide-text btn-xs rounded"
+                                    >
+    
+                                        <span class="glyphicon glyphicon-edit"
+                                            aria-hidden="true"></span>
+                                        <span><strong>view details</strong></span>
+                                </a>
+                               
+                              </td>
+                                </tr>
+                                <% }} else { %>
+                                  <tr>
+                                    <td colspan="5">orders Not Found</td>
+                                  </tr>
+                                  <% } %>
+    
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+</form>
+        </div>
+      </section>
+
+
+
+      <script>
+        // Download as PDF
+        // console.log(jsPDF);
+      document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+        // Get the table element
+      
+      
+        var doc = new jsPDF()
+          doc.autoTable({ html: '#ordersTable' })
+          doc.save('SalesReport.pdf')
+      });
+      
+      // Download as Excel
+      document.getElementById('downloadExcelBtn').addEventListener('click', function() {
+        // Get the table element
+        var table = document.getElementById('ordersTable');
+      
+        // Convert the table data to a worksheet object
+        var worksheet = XLSX.utils.table_to_sheet(table);
+      
+        // Create a new workbook and add the worksheet
+        var workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sales');
+      
+        // Save the Excel file
+        XLSX.writeFile(workbook, 'SalesReport.xlsx');
+      });
+      
+      </script>
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+      
+      
+      
+      <!-- SheetJS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      
+      
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

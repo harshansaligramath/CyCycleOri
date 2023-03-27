@@ -4,7 +4,7 @@ const loadCoupon = async (req,res)=>{
   try {
     const couponData = await Coupons.find()
     res.render('coupon',{message: undefined, val:'' , coupon:couponData})
-  } catch (error) {
+  } catch (error) { 
     console.log(error.message);
   }
 }
@@ -15,7 +15,9 @@ const addCoupon = async (req,res)=>{
       name : req.body.name,
       discount: req.body.discount,
       max:req.body.maxDiscount,
-      min:req.body.minValue
+      min:req.body.minValue,
+      
+      expiry_date:req.body.expiryDate
     })
     await coupon.save()
     res.redirect('coupon')

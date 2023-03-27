@@ -22,19 +22,19 @@
         <div class="screen">
             <div class="screen__content">
                 <form action="/register" method="post" onsubmit="return validateSignup()">
-                <h1>Sign Up</h1>
+                <h1 style="margin-left: 15px;">Sign Up</h1>
 
-                <span style="color: black;">provide credentials to login</span>
+                <span style="color: black;margin-left: 15px;">provide credentials to login</span>
                     
                     <div class="login__field">
                         <!-- <i class="login__icon fas fa-user"></i> -->
-                        <input  type="text" placeholder="Name" name="name" id="name" onkeyup="validateName()">
+                        <input  type="text" style="margin-left: 15px;height: 25px;" placeholder="Name" name="name" id="name" onkeyup="validateName()">
                     <span id="errName"></span>
                           
                     </div>
                     <div class="login__field">
                         <!-- <i class="login__icon fas fa-lock"></i> -->
-                        <input   type="text" placeholder="Email" name="email" id="email" onkeyup="validateEmail()">
+                        <input   type="text" style="margin-left: 15px;height: 25px;" placeholder="Email" name="email" id="email" onkeyup="validateEmail()">
                     <span id="errEmail"></span>  
                       
                    
@@ -43,21 +43,21 @@
 
                     <div class="login__field">
                         <!-- <i class="login__icon fas fa-lock"></i> -->
-                        <input  type="text" placeholder="mobile no" name="mno"  onkeyup="validateNumber()">
+                        <input  type="text" style="margin-left: 15px;height: 25px;" placeholder="mobile no" name="mno"  onkeyup="validateNumber()">
                         <span id="errNumber"></span>
                    
                    
                     </div>
                     <div class="login__field">
                         <!-- <i class="login__icon fas fa-lock"></i> -->
-                        <input   type="password" placeholder="Password" name="password" id="password" onkeyup="validatePassword()">
+                        <input   type="password" style="margin-left: 15px;height: 25px;" placeholder="Password" name="password" id="password" onkeyup="validatePassword()">
                     <span id="errPassword"></span>
                         
                    
                     </div>
 
 
-                    <button button type="submit" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">
+                    <button button type="submit" style="margin-left: 35px;height: 25px; width: 90px;" onclick="validateEmail(),validateName(),validatePassword(),validateNumber()">
                         <span class="button__text">register</span>
                         <!-- <i class="button__icon fas fa-chevron-right"></i> -->
                     </button>

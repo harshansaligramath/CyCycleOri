@@ -1,5 +1,7 @@
 const express = require("express")
+// const admin_route = express.Router();
 const admin_route = express();
+
 const session = require("express-session");
 const nocache = require("nocache")
 const config = require("../config/config");
@@ -86,9 +88,12 @@ admin_route.get('/blockCoupon',couponController.blockCoupon)
 admin_route.get('/orders',orderController.loadOrders)
 admin_route.get('/orderDetails',orderController.loadOrderDetails)
 admin_route.post('/editOrder',orderController.changeStatus)
+
+admin_route.get('/salesReport',orderController.salesReport)
+admin_route.post('/salesReport',orderController.salesReportPost)
   
-
-
+ 
+ 
 
 admin_route.get('*', function (req, res) {
     res.redirect('/admin');

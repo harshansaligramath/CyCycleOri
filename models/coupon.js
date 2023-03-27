@@ -47,6 +47,16 @@ const offerSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
+    expiry_date: {
+        type: Date,
+        required:true
+
+    
+    },
     isAvailable:{
         type:Number,
         default:1

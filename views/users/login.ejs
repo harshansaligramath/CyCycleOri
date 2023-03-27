@@ -26,26 +26,26 @@
     
                     <span style="color: black;">provide credentials to login</span>
                         
-                        <div class="login__field">
+                        <div class="login__field" >
                             <i class="login__icon fas fa-user"></i>
-                            <input id="email" type="text" placeholder="Email" name="email" onkeyup="validateEmail()">
+                            <input id="email" style="width: 70%;height: 30px;" type="text" placeholder="Email" name="email" onkeyup="validateEmail()">
                             <span id="errEmail"></span>  
                        
                         </div>
                         <div class="login__field">
                             <i class="login__icon fas fa-lock"></i>
-                            <input type="password" id="password" placeholder="Password" name="password" onkeyup="validatePassword()">
+                            <input type="password" id="password" style="width: 70%;height: 30px;" placeholder="Password" name="password" onkeyup="validatePassword()">
                             <span id="errPassword"></span>
                        
                         </div>
                     <a href="/forget" class="forgot">Forgot your password?</a>
     
-                        <button type="submit" onclick="validateEmail(), validatePassword()" class="button login__submit">
+                        <button type="submit" style="height: 20px;width: 70%;" onclick="validateEmail(), validatePassword()" class="button login__submit">
                             <span class="button__text">Log In</span>
                             <i class="button__icon fas fa-chevron-right"></i>
                         </button>
 
-                    <a href="/register" class="forgot">Sign Up</a>
+                    <a style="margin-top: 85px;" href="/register" class="forgot">Sign Up</a>
 
                         <% if(typeof message !=='undefined' ){ %>
                             <span style="color: crimson; padding-top: 20px;"><%= message %></span>

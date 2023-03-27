@@ -69,7 +69,7 @@ user_route.get('/removeFromCart',cartController.removeFromCart)
  
 // user_route.get("/", homeController.loadHome);
    
-   
+    
 
 // user_route.get('/singleCategory',categoryController.loadCategoryPage)
 user_route.get('/productShow', productController.loadProducts)
@@ -88,13 +88,26 @@ user_route.get('/orderSuccess',checkOutController.loadSuccess)
 
 
 
-user_route.get('/usersProfile',usersProfileController.loadUsersProfile)
-// user_route.get('/usersProfileOrders',usersProfileController.loadUsersOrders)
+// user_route.get('/usersProfile',usersProfileController.loadUsersProfile)
+// // user_route.get('/usersProfileOrders',usersProfileController.loadUsersOrders)
 
-user_route.get('/orders', usersProfileController.loadOrders)
+// user_route.get('/orders', usersProfileController.loadOrders)
+// user_route.get('/orderDetails', usersProfileController.loadOrderDetails)
+
+//start from here
+
+user_route.get('/dashboard', usersProfileController.loadDash)
 user_route.get('/orderDetails', usersProfileController.loadOrderDetails)
 user_route.get('/cancelOrder', usersProfileController.canselOrder)
 
+user_route.get('/address', usersProfileController.loadAddress)
+user_route.post('/address', usersProfileController.saveAddress)
+user_route.get('/editAddress', usersProfileController.loadEditAddress)
+user_route.post('/editAddress', usersProfileController.editAddress)
+user_route.get('/deleteAddress', usersProfileController.deleteAddress)
+
+// user_route.get('/profile', usersProfileController.loadProfile)
+// user_route.get('/orders', usersProfileController.loadOrders)
 
 
 

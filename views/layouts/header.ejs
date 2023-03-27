@@ -100,7 +100,7 @@
                       <span class="js-menu-toggle"></span>
                       <ul style="width: 120px">
                         <li>
-                          <a href="dashboard.html"
+                          <a href="/dashboard"
                             ><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                             <span>Account</span></a
@@ -116,6 +116,8 @@
 <li>
       <% if(user){ %>
           <a href="/logout"><i class="fas fa-lock u-s-m-r-6"></i> <span>Logout</span></a>    
+          <!-- <a href="/dashboard"
+          ><span>Profile</span></a> -->
         <% } else{ %>
             <a href="/login"><i class="fas fa-lock-open u-s-m-r-6"></i>  <span>Signin</span></a>
             <a href="/register"> <i class="fas fa-lock-open u-s-m-r-6"></i><span>Register</span></a>
@@ -154,9 +156,9 @@
                       data-placement="left"
                       title="Mail"
                     >
-                      <a href="/usersProfile"
+                      <!-- <a href="/dashboard"
                         ><i class="far fa-envelope"></i
-                      ></a>
+                      ></a> -->
                     </li>
                   </ul>
                   <!--====== End - List ======-->

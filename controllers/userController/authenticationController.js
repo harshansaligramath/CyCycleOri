@@ -205,7 +205,7 @@ const resendOtp = async (req, res) => {
     } catch (error) {
         console.log(error.message);
     }
-  }
+  } 
 module.exports = {
     loginLoad,
     verifyLogin,

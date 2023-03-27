@@ -1,6 +1,9 @@
 <%- include ('../layouts/adminHeader.ejs') %>
 <%- include ('../layouts/adminProfileLeft.ejs') %>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
 
   <div class="layout-page">
 
@@ -120,8 +123,10 @@
               </div>
             </div>
           </section>
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
           <script>
+
             function status(x, oId) {
                 let status
                 if(x==0){
@@ -136,8 +141,36 @@
                       // message :msg,
                       // callback: function (result) {  
                           // if(result){   
-                          if(x)document.getElementById('cancel').innerHTML=`<p class="small text-danger  mb-0 top-0 left-0">*this Order has been cancelled</p>
+
+
+
+swal({
+  title: "Are you sure you want to change?",
+  text: "Once changed, you will not be able to recover this file!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    
+                          // if(x)document.getElementById('cancel')
+                          
+                          if(x)document.getElementById('cancel').innerHTML=`<p class="small text-danger  mb-0 top-0 left-0">*this Order cancelled</p>
                           <br><br><br><br><br><br><br>`
+    swal("This order changed !", {
+      icon: "success",
+    });
+  } else {
+    swal("Your order is safe!");
+  }
+});
+
+
+
+
+                          // if(x)document.getElementById('cancel').innerHTML=`<p class="small text-danger  mb-0 top-0 left-0">*this Order has been cancelled</p>
+                          // <br><br><br><br><br><br><br>`
                             const data = {status:status,id:oId}
                             console.log("hooooooooooiiiiiiiiiiiiiiiiiii");
                             axios.post('/admin/editOrder', data)

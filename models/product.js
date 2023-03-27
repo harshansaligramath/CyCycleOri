@@ -28,7 +28,11 @@ const productSchema = new mongoose.Schema({
     isAvailable:{
         type:Number,
         default:1
-    }
+    },
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
 })
 
 module.exports = mongoose.model('Product',productSchema)

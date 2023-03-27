@@ -136,7 +136,7 @@
 
                                                                 <input class="input-text input-text--primary-style"
                                                                     type="text" id="billing-fname" name="firstname"
-                                                                    data-bill="">
+                                                                    data-bill="" onkeyup="validateName()">
                                                             </div>
                                                             <div class="u-s-m-b-15">
 
@@ -145,7 +145,7 @@
 
                                                                 <input class="input-text input-text--primary-style"
                                                                     type="text" id="billing-lname" name="lastname"
-                                                                    data-bill="">
+                                                                    data-bill="" onkeyup="validateName()">
                                                             </div>
                                                         </div>
 
@@ -157,7 +157,7 @@
 
                                                             <input class="input-text input-text--primary-style"
                                                                 type="text" id="billing-street" name="street"
-                                                                placeholder="House name and street name" data-bill="">
+                                                                placeholder="House name and street name" data-bill="" onkeyup="validatestate()">
                                                         </div>
 
                                                         <div class="u-s-m-b-15">
@@ -172,7 +172,8 @@
                                                                 <option value="uae">United Arab Emirate (UAE)</option>
                                                                 <option value="uk">India</option>
                                                                 <option value="us">Brazil</option>
-                                                            </select>
+                                                                
+                                                            </select onkeyup="validatestate()">
                                                             <!--====== End - Select Box ======-->
                                                         </div>
                                                         <!--====== End - Country ======-->
@@ -186,7 +187,7 @@
 
                                                             <input class="input-text input-text--primary-style"
                                                                 type="text" name="city" id="billing-town-city"
-                                                                data-bill="">
+                                                                data-bill="" onkeyup="validatestate()">
                                                         </div>
                                                         <!--====== End - Town / City ======-->
 
@@ -204,7 +205,7 @@
                                                                 <option value="al">Kerala</option>
                                                                 <option value="al">Tamilnadu</option>
                                                                 <option value="ny">Karnataka</option>
-                                                            </select>
+                                                            </select onkeyup="validatestate()">
                                                             <!--====== End - Select Box ======-->
                                                         </div>
                                                         <!--====== End - STATE/PROVINCE ======-->
@@ -218,7 +219,7 @@
 
                                                             <input class="input-text input-text--primary-style"
                                                                 type="text" id="billing-zip"
-                                                                placeholder="Zip/Postal Code" name="pin" data-bill="">
+                                                                placeholder="Zip/Postal Code" name="pin" data-bill="" onkeyup="validatePostal()">
                                                         </div>
                                                         <!--====== End - ZIP/POSTAL ======-->
                                                         <!--====== PHONE ======-->
@@ -228,7 +229,7 @@
 
                                                             <input class="input-text input-text--primary-style"
                                                                 type="number" name="mno" id="billing-phone"
-                                                                data-bill="">
+                                                                data-bill="" onkeyup="validateNumber()">
                                                         </div>
                                                         <!--====== End - PHONE ======-->
                                                         <div class="u-s-m-b-10">
@@ -296,6 +297,44 @@
                                                 </div>
                                             </div>
                                         </div> -->
+
+                                        <% if(userData.wallet>=0){ %>
+                                            <div class="o-summary__section u-s-m-b-30">
+                                                <div class="o-summary__box">
+                                                    <h1 class="checkout-f__h1">WALLET BALANCE</h1>
+                                                    <div class="u-s-m-b-10">
+                                                        <input type="hidden" id="payable" value="<%= products.totalPrice %>"
+                                                        name="payable" />
+                                                        <!--====== Radio Box ======-->
+                                                        <div >
+                                                            <!-- test -->
+                                                    <div class="radio-box">
+
+                                                        <input value="CODEEEE" type="radio" id="something"
+                                                            name="payment111" >
+                                                        <div class="radio-box__state radio-box__state--primary">
+
+                                                            <label class="radio-box__label" for="cash-on-delivery">₹ <%=userData.wallet %>
+                                                        </label>
+                                                        </div>
+                                                    </div>
+    
+                                                            <!-- <input value="COD"  type="checkbox" id="cb"
+                                                                
+                                                               onchange="val('<%=userData.wallet %>')">
+                                                            <div class="radio-box__state radio-box__state--primary">
+    
+                                                                <label class="radio-box__label" for="">₹ <%=userData.wallet %></label>
+                                                               
+                                                            </div> -->
+                                                        </div>
+                                                        <!--====== End - Radio Box ======-->
+    
+                                                        <span class="gl-text u-s-m-t-6">Pay Upon From your Wallet. </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% }%>
                                             <div class="o-summary__section u-s-m-b-30">
                                                 <div class="o-summary__box">
                                                     <table class="o-summary__table">
@@ -334,32 +373,7 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <% if(userData.wallet>0){ %>
-                                        <div class="o-summary__section u-s-m-b-30">
-                                            <div class="o-summary__box">
-                                                <h1 class="checkout-f__h1">WALLET BALANCE</h1>
-                                                <div class="u-s-m-b-10">
-                                                    <input type="hidden" id="payable" value="<%= products.totalPrice %>"
-                                                    name="payable" />
-                                                    <!--====== Radio Box ======-->
-                                                    <div >
-
-                                                        <input value="COD"  type="checkbox" id="cb"
-                                                            
-                                                           onchange="val('<%=userData.wallet %>')">
-                                                        <div class="radio-box__state radio-box__state--primary">
-
-                                                            <label class="radio-box__label" for="">₹ <%=userData.wallet %></label>
-                                                           
-                                                        </div>
-                                                    </div>
-                                                    <!--====== End - Radio Box ======-->
-
-                                                    <span class="gl-text u-s-m-t-6">Pay Upon From your Wallet. </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <% }%> 
+                                         
                                         <div class="o-summary__section u-s-m-b-30">
                                             <div class="o-summary__box">
                                                 <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
@@ -376,6 +390,8 @@
                                                                 on Delivery</label>
                                                         </div>
                                                     </div>
+
+                                                    
                                                     <!--====== End - Radio Box ======-->
 
                                                     <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery. (This
@@ -385,17 +401,7 @@
 
                                                 <div class="u-s-m-b-10">
 
-                                                    <!--====== Radio Box ======-->
-                                                    <!-- <div class="radio-box">
-
-                                                        <input value="Debit Card" class="ppmm" type="radio" id="pay-with-card"  name="payment">
-                                                        <div class="radio-box__state radio-box__state--primary">
-
-                                                            <label class="radio-box__label" for="pay-with-card">Pay With
-                                                                Credit / Debit Card</label>
-                                                        </div>
-                                                    </div> -->
-                                                    <!--====== End - Radio Box ======-->
+                                                    
 
                                                     <span class="gl-text u-s-m-t-6">International Credit Cards must be
                                                         eligible for use within the United States.</span>
@@ -422,7 +428,11 @@
                                                 <div>
 
                                                     <button class="btn btn--e-brand-b-2 btn-outline-warning btn-sm"
+                                                    onclick=" validateName(),validatestate(),validateNumber(),validatePostal()"
                                                         type="submit">PLACE ORDER</button>
+                                                        <% if(typeof message !=='undefined' ){ %>
+                                                            <span style="color: crimson; padding-top: 20px;"><%= message %></span>
+                                                            <% } %>	
                                                 </div>
                                             </div>
                                         </div>
@@ -457,36 +467,7 @@
     <script src="js/app.js"></script>
 
     <script>
-        function val(p){
-            gTotal =parseInt(document.getElementById('gTotal').value)
-           value = parseInt(p)
-           console.log(value,gTotal);
-           console.log(typeof(value),typeof(gTotal))
-           if( document.getElementById('cb').checked){
-            if(value>=gTotal){
-                document.getElementById('pay-pal').checked = false
-                document.getElementById('pay-with-card').checked = false
-                document.getElementById('cash-on-delivery').checked = false
-                document.getElementById('pay-pal').setAttribute('disabled','')
-                document.getElementById('pay-with-card').setAttribute('disabled','')
-                document.getElementById('cash-on-delivery').setAttribute('disabled','')
-                document.getElementById('payable').value = 0 
-                console.log(document.getElementById('payable').value);
-            }else {
-                document.getElementById('cash-on-delivery').checked = false
-
-                document.getElementById('cash-on-delivery').setAttribute('disabled','')
-                balance = gTotal-value
-                console.log(balance);
-                document.getElementById('payable').value = balance 
-                console.log(document.getElementById('payable').value);
-            }
-        }else{
-            document.getElementById('pay-pal').removeAttribute('disabled','')
-                document.getElementById('pay-with-card').removeAttribute('disabled','')
-                document.getElementById('cash-on-delivery').removeAttribute('disabled','')
-        }
-        }
+       
         function apply() {
             cop = document.getElementById('coupon').value
             subT = document.getElementById('subTotal').value
@@ -495,11 +476,16 @@
                 type: 'POST',
                 data: { id: cop },
                 success: function (data) {
+
+                    if (data.couponData.expiry_date>data.couponData.created_at) {     
                   if(subT>=data.couponData.min){
                     disc = (data.couponData.discount*subT)/100;
                     if(disc>data.couponData.max){
                         disc =data.couponData.max
                     }
+                   
+                        // console.log("datatatatatatatatatta");
+                    // }
                     total = subT-disc;
                     document.getElementById('dis').innerHTML = `
                     <td>COUPON DISCOUNT</td>
@@ -513,7 +499,19 @@
                     <input type="hidden" id='gTotal' value="${total}" name="amount" />`
                     document.getElementById('payable').value = total
                     console.log(data);
+                    console.log("dududududududud");
+
                   }
+                }
+                else{
+                    console.log("date expired");
+                    document.getElementById('dis').innerHTML = `
+                    <td>COUPON DISCOUNT</td>
+                    <td>${data.couponData.discount} %</td>`
+                    document.getElementById('amt').innerHTML = `    
+                    <td></td>
+                    <td>Coupon Date expired</td>`
+                }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
@@ -521,6 +519,64 @@
             });
 
         }
+
+
+
+
+  function validateName(){
+    let name=document.getElementById("name").value;
+     if(name ==""){
+      document.getElementById("errName").innerHTML="please enter name";
+      return false
+       }else{
+        document.getElementById("errName").innerHTML="";
+          return true
+       }
+  }
+  function validatestate(){
+    let name=document.getElementById("name").value;
+     if(name ==""){
+      document.getElementById("errName").innerHTML="please select state";
+      return false
+       }else{
+        document.getElementById("errName").innerHTML="";
+          return true
+       }
+  }
+
+
+  function validateNumber(){
+    let number=document.getElementById("number").value;
+     if(/^[0-9]+$/.test(number)==false){
+      document.getElementById("errNumber").innerHTML="please enter a valid number";
+      return false
+     }
+    else if(number.length != 10){
+      document.getElementById("errNumber").innerHTML="please enter 10 digits";
+      return false
+       }else{
+        document.getElementById("errNumber").innerHTML="";
+          return true
+       }
+  }
+  function validatePostal(){
+    let number=document.getElementById("number").value;
+     if(/^[0-9]+$/.test(number)==false){
+      document.getElementById("errNumber").innerHTML="please enter a valid number";
+      return false
+     }
+    else if(number.length != 6){
+      document.getElementById("errNumber").innerHTML="please enter proper digits";
+      return false
+       }else{
+        document.getElementById("errNumber").innerHTML="";
+          return true
+       }
+  }
+ 
+  
+
+
 
 
     </script>
