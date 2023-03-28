@@ -1,8 +1,10 @@
+require('dotenv').config()
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/CyCycleDataBase");
+mongoose.connect(process.env.DB);
 // const path=require('path')
-const cors=require("cors");
+const cors=require("cors"); 
 const nocache = require("nocache")
+
 
 
 const express = require("express");
