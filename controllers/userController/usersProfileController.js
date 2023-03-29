@@ -102,7 +102,7 @@ const loadDash = async (req, res) => {
         
         res.render('dashboard', { user: req.session.user,userData,orderData})
         console.log("allllllllll");
-        console.log(userData.wallet);
+        console.log(orderData);
         console.log("allllllllll");
 
     }else{
