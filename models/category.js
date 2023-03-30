@@ -16,7 +16,7 @@ const categorySchema = new mongoose.Schema({
     },
     is_admin: {
         type: Number,
-        required: true
+        
     },
     created_at: {
         type: Date,

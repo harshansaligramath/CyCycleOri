@@ -49,10 +49,17 @@ const addCategory = async (req, res) => {
         const category = Category({
           name: req.body.category,
         });
+        console.log("//////////////");
+        console.log(category);
+        console.log("//////////////");
         const categoryData = await category.save();
+
+        // await category.save();
+        console.log("...........................");
         res.redirect("category");
       } catch (error) {
         console.log(error);
+        console.log("some problems occured");
       }
     }
   };

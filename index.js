@@ -5,8 +5,8 @@ mongoose.connect(process.env.DB);
 const cors=require("cors"); 
 const nocache = require("nocache")
 
-
-
+ 
+ 
 const express = require("express");
 const app = express();
 app.use(cors());
