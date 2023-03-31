@@ -58,10 +58,16 @@
                                             </td>
                                             <td>
                                             
-
-                                              <a id='<%- key._id %>' onclick="return confirm('do you want to cancel Order?')" class="text-danger"
-                                              href="/cancelOrder?id=<%= key._id %>"><i style="color: #ff0000;"
-                                                class="m-r-5 mdi mdi-border-color"></i>cancelOrder</a>
+                                              <% if(key.status=='Cancelled'||key.status=='Delivered'){ %>
+                                                <a><i class="fas fa-lock u-s-m-r-6"></i> <span></span></a>    
+                                                <!-- <a href="/dashboard"
+                                                ><span>Profile</span></a> -->
+                                              <% } else{ %>
+                                                <a id='<%- key._id %>' onclick="return confirm('do you want to cancel Order?')" class="text-danger"
+                                                  href="/cancelOrder?id=<%= key._id %>"><i style="color: #ff0000;"
+                                                    class="m-r-5 mdi mdi-border-color"></i>cancelOrder</a>
+                                              <% }  %> 
+                                              
                                               
                                                 <!-- <a id='<%- key._id %>' href="/cancelOrder?id=<%= key._id %>"
                                                 >canselOrder</a> -->

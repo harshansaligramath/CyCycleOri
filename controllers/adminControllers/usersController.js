@@ -55,10 +55,12 @@ const loadDashboard = async (req, res) => {
   try {
     const products = await Product.find()
     let pds = [], qty = []
+    console.log("111111111111");
     products.map(x => {
       pds = [...pds, x.name]
       qty = [...qty, x.stock]
     })
+    
     const arr = [];
     const order = await orders.find().populate('products.item.productId');
     for (let orders of order) {
@@ -67,9 +69,12 @@ const loadDashboard = async (req, res) => {
         if (index !== -1) {
           arr[index].qty += product.qty;
         } else {
+          console.log(arr);
+          console.log(orders);
           arr.push({ product: product.productId.name, qty: product.qty });
+          console.log("3333333333");
         }
-      }
+      }  
     }
     const key1 = [];
     const key2 = [];
@@ -90,15 +95,23 @@ const loadDashboard = async (req, res) => {
     console.log(error.message);
   }
 };
-
-// const loadDashboard1 = async (req, res) => {
+// const loadDashboard = async (req, res) => {
 //   try {
 //     const userData = await User.findById({ _id: req.session.admin_id });
-//     res.render("dashboard", { admin: userData });
+//     const orderData = await Order.find().populate('products.item.productId')
+//     let arr =[] , dt=[]
+//     orderData.map((x)=>{
+//       arr = [...arr,x.amount]
+//       dt = [...dt,x.createdAt]
+//     })
+//     console.log(arr,dt);
+//     res.render("dashboard", { admin: userData,orderData,arr,dt, active: 1 });
 //   } catch (error) {
 //     console.log(error.message);
 //   }
 // };
+
+
 const loadUsers = async (req, res) => {
   try {
     var search = "";

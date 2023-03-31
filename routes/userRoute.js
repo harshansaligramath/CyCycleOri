@@ -84,6 +84,12 @@ user_route.get('/productShow', productController.loadProducts)
 user_route.get('/checkout',checkOutController.loadCheckout) 
 user_route.post('/applyCoupon',checkOutController.applyCoupon)
 user_route.post('/placeOrder',checkOutController.placeOrder) 
+
+user_route.get('/laddress', checkOutController.loadAddress)
+user_route.post('/laddress', checkOutController.saveloadAddress)
+
+user_route.get('/editAddress1', checkOutController.loadEditAddress)
+user_route.post('/editAddress1', checkOutController.editAddress)
 user_route.get('/orderSuccess',checkOutController.loadSuccess)
 
 
@@ -100,7 +106,7 @@ user_route.get('/dashboard', usersProfileController.loadDash)
 user_route.get('/orderDetails', usersProfileController.loadOrderDetails)
 user_route.get('/cancelOrder', usersProfileController.canselOrder)
 
-user_route.get('/address', usersProfileController.loadAddress)
+user_route.get('/address', usersProfileController.loadAddress) 
 user_route.post('/address', usersProfileController.saveAddress)
 user_route.get('/editAddress', usersProfileController.loadEditAddress)
 user_route.post('/editAddress', usersProfileController.editAddress)

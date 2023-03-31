@@ -29,7 +29,7 @@ admin_route.set('views', './views/admin');
 admin_route.use(express.json());
 admin_route.use(express.urlencoded({ extended: true }));
 admin_route.use(nocache());
-
+ 
 admin_route.get('/', auth.isLogout, usersController.loadLogin);
 admin_route.post('/', usersController.verifyLogin);
 admin_route.get('/logout', auth.isLogin, usersController.logout);

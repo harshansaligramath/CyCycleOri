@@ -58,7 +58,7 @@ const loadProducts = async (req, res) => {
       if(!page){
           page=0
       }
-      skip=page*limit
+      skip=page*limit 
       console.log(category);
       let arr = []
       if (category) {
