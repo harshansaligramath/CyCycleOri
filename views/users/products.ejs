@@ -182,7 +182,7 @@
 
      
                                     <!--====== Pagination ======-->
-                                    <ul class="shop-p__pagination">
+                                    <!-- <ul class="shop-p__pagination">
                                         <li class="is-active">
 
                                             <a href="/productShow?page=0">1</a></li>
@@ -198,7 +198,20 @@
                                         <li>
 
                                             <a class="fas fa-angle-right" href="/productShow?page=4"></a></li>
-                                    </ul>
+                                    </ul> -->
+                                    <div class="u-s-p-y-60" id="pagnation">
+
+                                        <% if(pageCount > 1){ %>
+                                            <ul class="shop-p__pagination">
+                                            <% for(i=0;i<pageCount;i++){%>    
+                                                <li> 
+                                                    <a href="/productShow?page=<%-i%>"><%-i+1%></a></li>
+        
+                                            <% }%>
+                                            </ul>
+                                        <%}%>
+                                        
+                                    </div>
                                     <!--====== End - Pagination ======-->
                                 </div>
                             </div>
@@ -493,5 +506,6 @@
             </div>
         </div>
     </noscript>
+  
 </body>
 </html>
