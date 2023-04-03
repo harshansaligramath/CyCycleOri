@@ -161,6 +161,17 @@ const loadAddress = async (req, res) => {
       console.log(error.message)
   }
 }
+const contactPage = async (req, res) => {
+  try {
+      
+      res.render('contactPage',{ user: req.session.user,})
+  
+     
+  
+  }catch (error) {
+      console.log(error.message)
+  }
+}
   
   // const loadProfile = async function (req,res) {
   //   try {
@@ -178,6 +189,7 @@ module.exports = {
     saveAddress,
     editAddress,
     deleteAddress,
-    loadEditAddress
+    loadEditAddress,
+    contactPage
     
 }

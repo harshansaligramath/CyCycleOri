@@ -112,7 +112,7 @@ user_route.get('/editAddress', usersProfileController.loadEditAddress)
 user_route.post('/editAddress', usersProfileController.editAddress)
 user_route.get('/deleteAddress', usersProfileController.deleteAddress)
 
-// user_route.get('/profile', usersProfileController.loadProfile)
+user_route.get('/contact', usersProfileController.contactPage)
 // user_route.get('/orders', usersProfileController.loadOrders)
 
 
